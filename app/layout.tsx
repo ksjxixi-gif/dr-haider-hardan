@@ -9,7 +9,7 @@ import { site } from '@/content/site'
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: 'Dr. Haider N. Hardan · SEEH, Sustainability for Energy & Health', template: '%s · SEEH' },
+  title: { default: 'Dr. Haider N. Hardan · SEEH, Sustainability, Entrepreneurship, Energy & Health', template: '%s · SEEH' },
   description: site.description,
   openGraph: {
     type: 'website',
@@ -29,7 +29,7 @@ const jsonLd = {
     {
       '@type': 'Organization',
       name: 'SEEH',
-      alternateName: 'Sustainability for Energy & Health',
+      alternateName: 'Sustainability, Entrepreneurship, Energy & Health',
       url: site.url,
       founder: { '@id': `${site.url}/#founder` },
       address: { '@type': 'PostalAddress', addressLocality: 'Amman', addressCountry: 'JO' },

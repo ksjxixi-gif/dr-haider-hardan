@@ -55,7 +55,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="wrap flex flex-col gap-2 py-6 text-sm text-slate-400 sm:flex-row sm:justify-between">
-          <p>© {new Date().getFullYear()} SEEH, Sustainability for Energy &amp; Health. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} SEEH, Sustainability, Entrepreneurship, Energy &amp; Health. All rights reserved.</p>
           <p>Founded by {site.founder}</p>
         </div>
       </div>

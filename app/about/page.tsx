@@ -9,7 +9,7 @@ import { SocialButtons } from '@/components/icons'
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'Dr. Haider N. Hardan: entrepreneur, inventor and founder of SEEH, Sustainability for Energy & Health.',
+  description: 'Dr. Haider N. Hardan: entrepreneur, inventor and founder of SEEH, Sustainability, Entrepreneurship, Energy & Health.',
 }
 
 const values = [
@@ -66,7 +66,7 @@ export default function About() {
       <Section tone="soft">
         <SectionHeader
           eyebrow="The company"
-          title="SEEH: Sustainability for Energy & Health"
+          title="SEEH: Sustainability, Entrepreneurship, Energy & Health"
           intro="A company that brings entrepreneurship, innovation, product development and commercial investment together under one roof."
           center
         />

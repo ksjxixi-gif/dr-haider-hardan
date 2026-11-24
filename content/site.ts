@@ -2,8 +2,8 @@
 
 export const site = {
   name: 'SEEH',
-  fullName: 'SEEH, Sustainability for Energy & Health',
-  tagline: 'Sustainability for Energy & Health',
+  fullName: 'SEEH, Sustainability, Entrepreneurship, Energy & Health',
+  tagline: 'Sustainability, Entrepreneurship, Energy & Health',
   url: 'https://seeh.company',
   founder: 'Dr. Haider N. Hardan',
   location: 'Amman, Jordan',

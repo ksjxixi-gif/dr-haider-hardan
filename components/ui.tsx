@@ -31,7 +31,7 @@ export function Logo({ light = false }: { light?: boolean }) {
       <LogoMark light={light} size={30} />
       <span className="leading-none">
         <span className={`block font-[family-name:Michroma] text-[21px] tracking-[0.04em] ${light ? 'text-white' : 'text-ink'}`}>SEEH</span>
-        <span className={`mt-1.5 block text-[10px] tracking-[0.04em] ${light ? 'text-white/70' : 'text-body'}`}>Sustainability for Energy &amp; Health</span>
+        <span className={`mt-1.5 block text-[10px] tracking-[0.04em] ${light ? 'text-white/70' : 'text-body'}`}>Sustainability, Entrepreneurship, Energy &amp; Health</span>
       </span>
     </span>
   )

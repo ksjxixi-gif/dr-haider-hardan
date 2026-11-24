@@ -28,7 +28,7 @@ export default function Home() {
         <div className="wrap grid gap-12 py-12 md:py-16 lg:grid-cols-12 lg:gap-12 lg:py-20">
           <Reveal className="flex flex-col lg:col-span-5">
             <p className="text-[13px] font-medium uppercase tracking-[0.08em] text-body">
-              SEEH <span className="mx-2 text-slate-300">/</span> Sustainability for Energy &amp; Health
+              Sustainability, Entrepreneurship, Energy &amp; Health
             </p>
             <h1 className="h1 mt-7">
               From invention
