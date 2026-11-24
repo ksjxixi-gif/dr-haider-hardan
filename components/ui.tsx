@@ -5,26 +5,33 @@ import type { ReactNode } from 'react'
 import type { Img } from '@/content/images'
 import { Reveal } from './Reveal'
 
-export function Logo({ light = false, size = 34 }: { light?: boolean; size?: number }) {
+/** SEEH mark redrawn from the brand banner: outlined leaf over a blue water-drop crescent.
+ *  TODO(client): replace with the official vector logo file when available. */
+export function LogoMark({ light = false, size = 34 }: { light?: boolean; size?: number }) {
+  const ink = light ? '#ffffff' : '#0a1b3d'
+  const id = light ? 'seeh-drop-l' : 'seeh-drop-d'
+  return (
+    <svg viewBox="0 0 40 46" width={size} height={(size * 46) / 40} aria-hidden="true">
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#6cc0f7" />
+          <stop offset="1" stopColor="#1673e6" />
+        </linearGradient>
+      </defs>
+      <path d="M10 13C3 20 2 33 10 40c6 5 15 6 21 2-10 1-19-5-21-14-1-5-1-10 0-15Z" fill={`url(#${id})`} />
+      <path d="M14 40C7.5 29 11 13 28 3c6 13 3 29-14 37Z" stroke={ink} strokeWidth="2.6" strokeLinejoin="round" fill="none" />
+      <path d="M16.5 33.5c.5-7.5 3.5-13 8.5-18 .5 7.5-2.5 13.5-8.5 18Z" fill={ink} />
+    </svg>
+  )
+}
+
+export function Logo({ light = false }: { light?: boolean }) {
   return (
     <span className="flex items-center gap-3">
-      <svg viewBox="0 0 40 40" width={size} height={size} aria-hidden="true">
-        <defs>
-          <linearGradient id={light ? 'lg-l' : 'lg-d'} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#fbbf24" />
-            <stop offset="0.5" stopColor="#f97316" />
-            <stop offset="1" stopColor="#0ea5e9" />
-          </linearGradient>
-        </defs>
-        <circle cx="20" cy="20" r="19" fill={light ? 'rgba(255,255,255,0.12)' : '#0a1b3d'} />
-        <g fill="none" stroke={`url(#${light ? 'lg-l' : 'lg-d'})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M20 8s-8 9.5-8 15a8 8 0 0 0 16 0c0-5.5-8-15-8-15Z" />
-          <path d="M16.5 27c0-4.5 3-7 7-7 0 4-2.7 7-7 7Z" />
-        </g>
-      </svg>
+      <LogoMark light={light} size={30} />
       <span className="leading-none">
-        <span className={`block font-[family-name:var(--font-display)] text-[19px] font-semibold tracking-[0.14em] ${light ? 'text-white' : 'text-ink'}`}>SEEH</span>
-        <span className={`mt-1 block text-[9.5px] font-medium uppercase tracking-[0.12em] ${light ? 'text-white/70' : 'text-body'}`}>Sustainability for Energy &amp; Health</span>
+        <span className={`block font-[family-name:Michroma] text-[21px] tracking-[0.04em] ${light ? 'text-white' : 'text-ink'}`}>SEEH</span>
+        <span className={`mt-1.5 block text-[10px] tracking-[0.04em] ${light ? 'text-white/70' : 'text-body'}`}>Sustainability for Energy &amp; Health</span>
       </span>
     </span>
   )

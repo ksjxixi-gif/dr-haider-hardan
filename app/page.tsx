@@ -140,7 +140,6 @@ export default function Home() {
 
       {/* ───────── FOUNDER ───────── */}
       <Section tone="navy" className="overflow-hidden">
-        <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.25),transparent)]" />
         <div className="grid items-center gap-12 lg:grid-cols-[420px_1fr] lg:gap-20">
           <Reveal className="mx-auto w-full max-w-[420px]">
             <div className="relative overflow-hidden rounded-xl ring-1 ring-white/15">

@@ -21,7 +21,7 @@ export const img = {
   engineerLab: stock('engineer-lab', 1600, 1067, 'Engineer working in a technology lab'),
   inventor: stock('inventor-sketch', 1600, 1067, 'Inventor sketching product designs'),
   city: stock('city', 1600, 1067, 'Modern glass office towers'),
-  portrait: { src: '/images/haider-portrait.webp', w: 440, h: 680, alt: 'Portrait of Dr. Haider N. Hardan' },
+  portrait: { src: '/images/haider-portrait-v2.webp', w: 385, h: 600, alt: 'Portrait of Dr. Haider N. Hardan' },
 } satisfies Record<string, Img>
 
 export const sectorImg = {
