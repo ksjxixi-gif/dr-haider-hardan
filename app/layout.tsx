@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', creator: '@DrHaiderHardan1' },
 }
 
-export const viewport: Viewport = { themeColor: '#050a14' }
+export const viewport: Viewport = { themeColor: '#0a1b3d' }
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:bg-gold focus:px-4 focus:py-2 focus:text-ink">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-brand focus:px-4 focus:py-2 focus:text-white">
           Skip to content
         </a>
         <Header />

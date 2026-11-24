@@ -1,184 +1,272 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowRight, Coins, Factory, FlaskConical, Handshake, Quote, ShieldCheck } from 'lucide-react'
 import { audiences, gallery, process, sectors, site } from '@/content/site'
 import { projects } from '@/content/projects'
-import { ArrowLink, ButtonLink, CtaBand, Section, SectionHead, StageTag } from '@/components/ui'
+import { img, projectImg, sectorImg } from '@/content/images'
+import { Button, CtaBand, Section, SectionHeader, StageBadge, TextLink } from '@/components/ui'
 import { Reveal } from '@/components/Reveal'
-import { HeroArt } from '@/components/HeroArt'
 import { SectorIcon } from '@/components/SectorIcon'
 import { SocialButtons } from '@/components/icons'
+
+const audienceIcons = [Coins, Factory, Handshake, FlaskConical]
 
 export default function Home() {
   const featured = projects.filter((p) => p.featured)
   return (
     <>
-      {/* HERO */}
-      <section className="relative -mt-20 flex min-h-[100svh] flex-col overflow-hidden pt-20 md:-mt-24 md:pt-24">
-        <HeroArt className="absolute inset-0 h-full w-full" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/50 to-ink/30 md:bg-gradient-to-r md:from-ink/95 md:via-ink/60 md:to-transparent" />
-        <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
+      {/* ───────── HERO ───────── */}
+      <section className="on-dark relative -mt-[76px] overflow-hidden bg-navy-900 text-white">
+        <Image src={img.heroSolar.src} alt="" fill priority sizes="100vw" className="object-cover object-[center_70%]" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-navy-950/85 via-navy-900/45 to-transparent" />
+        <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy-950/85 via-navy-900/30 to-transparent" />
 
-        <div className="wrap relative flex flex-1 items-center py-16 md:py-24">
-          <Reveal className="max-w-4xl">
-            <p className="kicker mb-8 md:mb-10">SEEH · Sustainability for Energy &amp; Health</p>
-            <h1 className="display lg:!text-[4.6rem]">
-              Turning bold ideas into <em>sustainable</em> real-world solutions.
-            </h1>
-            <p className="lead mt-8 max-w-xl text-[#c6d0e0]">
-              Clean energy, smarter technology and a healthier tomorrow. Founded by {site.founder}, entrepreneur and inventor, SEEH
-              turns unconventional ideas into products and ventures with global potential.
+        <div className="wrap relative flex flex-col justify-center pb-12 pt-32 lg:min-h-[calc(100svh-40px)] lg:pb-48 lg:pt-36">
+          <Reveal className="max-w-3xl">
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
+              <span className="h-2 w-2 rounded-full bg-amber-400" aria-hidden /> Sustainability for Energy &amp; Health
             </p>
-            <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
-              <ButtonLink href="/projects" variant="gold">Explore our projects</ButtonLink>
-              <ArrowLink href="/partnerships">Partner with us</ArrowLink>
+            <h1 className="h1 mt-6">
+              Turning ideas into <span className="sun-text">sustainable</span> real-world solutions.
+            </h1>
+            <p className="lead mt-6 max-w-2xl !text-[#dbe6f5]">
+              Clean energy. Smarter technology. Healthier tomorrow. SEEH develops ventures, products and technologies with global
+              commercial potential, and builds the partnerships to bring them to market.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Button href="/projects">Explore our projects</Button>
+              <Button href="/partnerships" kind="glass" arrow={false}>
+                Partner with us
+              </Button>
+            </div>
+          </Reveal>
+
+          <Reveal delay={200} className="mt-10 flex items-center gap-4 lg:absolute lg:bottom-48 lg:right-10 lg:mt-0">
+            <Image src={img.portrait.src} alt="" width={64} height={64} className="h-14 w-14 rounded-full object-cover object-top ring-2 ring-white/60" />
+            <div className="leading-tight">
+              <p className="text-xs uppercase tracking-[0.14em] text-white/70">Founded by</p>
+              <p className="mt-1 font-[family-name:var(--font-display)] text-lg font-semibold">{site.founder}</p>
             </div>
           </Reveal>
         </div>
 
-        <ol className="wrap relative grid grid-cols-2 border-t rule sm:grid-cols-3 lg:grid-cols-5">
-          {sectors.map((s) => (
-            <li key={s.key} className="flex items-center gap-3 py-6 text-[13px] tracking-[0.03em] text-[#c6d0e0]">
-              <SectorIcon sector={s.key} size={18} />
-              {s.short}
-            </li>
-          ))}
-        </ol>
+        {/* pillar bar, echoing the brand banner */}
+        <div className="relative lg:absolute lg:inset-x-0 lg:bottom-0">
+          <div className="wrap">
+            <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-t-3xl border border-b-0 border-white/15 bg-white/10 backdrop-blur-md sm:grid-cols-3 lg:grid-cols-5">
+              {sectors.map((s, i) => (
+                <li key={s.key} className={`flex flex-col items-center gap-2.5 bg-navy-950/40 px-3 py-5 text-center md:py-6 ${i === 4 ? 'col-span-2 sm:col-span-1' : ''}`}>
+                  <SectorIcon sector={s.key} plain size={26} className="text-amber-300" />
+                  <span className="text-[13px] font-medium leading-snug text-white/90 md:text-sm">{s.title}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </section>
 
-      {/* STATEMENT */}
-      <section className="py-28 md:py-36">
-        <Reveal className="wrap text-center">
-          <p className="mx-auto max-w-4xl font-serif text-[clamp(1.9rem,4vw,3.4rem)] font-light leading-[1.15] tracking-[-0.03em]">
-            “We don’t compete in saturated markets. <span className="grad">We create new ones.</span>”
-          </p>
-          <p className="lead mx-auto mt-10 max-w-2xl">
-            SEEH brings entrepreneurship, invention, product development and investment together, turning unconventional ideas into
-            solutions that can be built, manufactured and scaled worldwide.
-          </p>
-        </Reveal>
-      </section>
-
-      {/* FOUNDER */}
+      {/* ───────── WHO WE ARE ───────── */}
       <Section>
-        <div className="grid items-center gap-16 lg:grid-cols-[400px_1fr] lg:gap-24">
-          <Reveal className="mx-auto w-full max-w-[400px] px-4 lg:px-0">
-            <figure className="frame-offset">
-              <Image src="/images/haider-portrait.webp" alt="Portrait of Dr. Haider N. Hardan" width={440} height={680} sizes="(min-width:1024px) 400px, 90vw" className="relative aspect-[440/560] w-full object-cover object-top" />
-            </figure>
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <p className="eyebrow">Who we are</p>
+            <h2 className="h2 mt-4">Innovation, entrepreneurship and technology, under one roof.</h2>
+            <p className="lead mt-6">
+              SEEH is a Jordan-based company that turns unconventional ideas into products and ventures that can be developed,
+              manufactured and marketed in local and global markets.
+            </p>
+            <p className="lead mt-4">
+              We don’t compete in saturated markets. <strong className="font-semibold text-ink">We create new ones</strong>, by
+              combining invention, research, intellectual-property protection and strong partnerships.
+            </p>
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+              {['Idea to market, end to end', 'IP protected before disclosure', 'Built for international scale', 'Partnership-driven growth'].map((t) => (
+                <li key={t} className="flex items-center gap-3 text-[15.5px] font-medium">
+                  <ShieldCheck size={20} className="shrink-0 text-leaf" aria-hidden /> {t}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-9">
+              <TextLink href="/about">More about SEEH</TextLink>
+            </div>
+          </Reveal>
+
+          <Reveal delay={120} className="grid grid-cols-2 gap-4">
+            <div className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-3xl">
+              <Image src={img.solarAerial.src} alt={img.solarAerial.alt} fill sizes="(min-width:1024px) 600px, 100vw" className="object-cover" />
+            </div>
+            <div className="relative aspect-square overflow-hidden rounded-3xl">
+              <Image src={img.ai.src} alt={img.ai.alt} fill sizes="(min-width:1024px) 300px, 50vw" className="object-cover" />
+            </div>
+            <div className="relative aspect-square overflow-hidden rounded-3xl">
+              <Image src={img.healthyBowl.src} alt={img.healthyBowl.alt} fill sizes="(min-width:1024px) 300px, 50vw" className="object-cover" />
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* ───────── FOCUS AREAS ───────── */}
+      <Section tone="soft">
+        <SectionHeader
+          eyebrow="What we work on"
+          title="Five fields. One mission: sustainable value."
+          intro="A diversified portfolio across the sectors shaping the next decade."
+          center
+        />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
+          {sectors.map((s, i) => (
+            <Reveal key={s.key} delay={(i % 3) * 80} className={i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'}>
+              <article className="card group h-full overflow-hidden">
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image src={sectorImg[s.key].src} alt={sectorImg[s.key].alt} fill sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw" className="card-img object-cover" />
+                </div>
+                <div className="relative p-6 md:p-7">
+                  <SectorIcon sector={s.key} className="-mt-14 mb-4 border-4 border-white shadow-sm" />
+                  <h3 className="h3">{s.title}</h3>
+                  <p className="mt-3 text-[15.5px] leading-7 text-body">{s.body}</p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* ───────── FOUNDER ───────── */}
+      <Section tone="navy" className="overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.25),transparent)]" />
+        <div className="grid items-center gap-12 lg:grid-cols-[420px_1fr] lg:gap-20">
+          <Reveal className="mx-auto w-full max-w-[420px]">
+            <div className="relative overflow-hidden rounded-[28px] ring-1 ring-white/15">
+              <Image src={img.portrait.src} alt={img.portrait.alt} width={440} height={680} sizes="(min-width:1024px) 420px, 90vw" className="aspect-[4/5] w-full object-cover object-top" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950/90 to-transparent p-6 pt-16">
+                <p className="font-[family-name:var(--font-display)] text-xl font-semibold">{site.founder}</p>
+                <p className="text-sm text-white/75">Founder · {site.location}</p>
+              </div>
+            </div>
           </Reveal>
           <Reveal delay={120}>
-            <p className="kicker mb-6">The founder</p>
-            <h2 className="h-sec">{site.founder}</h2>
-            <p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted">Entrepreneur · Inventor · Innovator</p>
-            <p className="lead mt-8 max-w-2xl">
-              From inventing in the dental clinic to building ventures in energy, AI and nutrition, Haider works where invention meets
-              business: finding ideas with real commercial potential and carrying them from concept to patent, manufacturing and market.
+            <p className="eyebrow">Meet the founder</p>
+            <Quote size={40} className="mt-6 text-amber-400" aria-hidden />
+            <blockquote className="mt-4 font-[family-name:var(--font-display)] text-[clamp(1.5rem,2.6vw,2.15rem)] font-medium leading-snug tracking-[-0.02em]">
+              Real growth doesn’t come from competing in crowded markets. It comes from creating new ones, and from partners who see
+              the opportunity early.
+            </blockquote>
+            <p className="lead mt-6 max-w-2xl">
+              Entrepreneur, inventor and innovator. Dr. Haider’s journey started with inventing in the dental clinic and now spans clean
+              energy, artificial intelligence and healthy nutrition.
             </p>
-            <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-center">
-              <SocialButtons />
-              <ArrowLink href="/about">Full story</ArrowLink>
+            <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
+              <Button href="/about" kind="glass">Read his story</Button>
+              <SocialButtons dark />
             </div>
           </Reveal>
         </div>
       </Section>
 
-      {/* FOCUS AREAS */}
+      {/* ───────── PROJECTS ───────── */}
       <Section>
-        <SectionHead kicker="What we work on" title={<>Five fields. <em>One mission.</em></>} />
-        <div className="grid gap-px overflow-hidden rounded-sm bg-[rgba(140,170,230,0.16)] md:grid-cols-2 lg:grid-cols-3">
-          {sectors.map((s, i) => (
-            <Reveal key={s.key} delay={(i % 3) * 80} className="bg-ink p-8 md:p-10">
-              <div className="flex items-center justify-between">
-                <SectorIcon sector={s.key} boxed />
-                <span className="num">0{i + 1}</span>
-              </div>
-              <h3 className="h-card mt-10">{s.title}</h3>
-              <p className="mt-4 text-[15px] leading-7 text-muted">{s.body}</p>
-            </Reveal>
-          ))}
-          <Reveal className="flex flex-col justify-between bg-ink-3 p-8 md:p-10">
-            <p className="h-card">Have an idea, capacity or capital in one of these fields?</p>
-            <div className="mt-8"><ArrowLink href="/contact">Let’s talk</ArrowLink></div>
-          </Reveal>
+        <SectionHeader
+          eyebrow="Projects & technologies"
+          title="Selected work in progress"
+          intro="Shown at a high level to protect intellectual property. Technical details are shared with qualified partners under NDA."
+          action={<Button href="/projects" kind="outline">All projects</Button>}
+        />
+        <div className="grid gap-6 md:grid-cols-3">
+          {featured.map((p, i) => {
+            const im = projectImg(p.slug, p.sector)
+            return (
+              <Reveal key={p.slug} delay={i * 100}>
+                <Link href={`/projects/${p.slug}`} className="card group flex h-full flex-col overflow-hidden">
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <Image src={im.src} alt={im.alt} fill sizes="(min-width:768px) 33vw, 100vw" className="card-img object-cover" />
+                    <div className="absolute left-4 top-4"><StageBadge stage={p.stage} /></div>
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <p className="flex items-center gap-2 text-sm font-medium text-body">
+                      <SectorIcon sector={p.sector} plain size={16} /> {sectors.find((s) => s.key === p.sector)?.short}
+                    </p>
+                    <h3 className="h3 mt-2">{p.title}</h3>
+                    <p className="mt-3 flex-1 text-[15.5px] leading-7 text-body">{p.summary}</p>
+                    <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
+                      <span className="text-sm text-body">
+                        Seeking: <span className="font-medium text-ink">{p.seeking[0]}</span>
+                      </span>
+                      <ArrowRight size={18} className="text-brand transition-transform group-hover:translate-x-1" aria-hidden />
+                    </div>
+                  </div>
+                </Link>
+              </Reveal>
+            )
+          })}
         </div>
       </Section>
 
-      {/* FEATURED PROJECTS */}
-      <Section>
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <SectionHead kicker="Projects & technologies" title={<>Selected work <em>in progress.</em></>} className="!mb-0" />
-          <ArrowLink href="/projects">All projects</ArrowLink>
-        </div>
-        <div className="mt-16 grid gap-px bg-[rgba(140,170,230,0.16)] md:grid-cols-3">
-          {featured.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 100} className="bg-ink">
-              <Link href={`/projects/${p.slug}`} className="row-hover group flex h-full flex-col p-8 md:p-10">
-                <div className="flex items-center justify-between">
-                  <span className="num text-xl">0{i + 1}</span>
-                  <StageTag stage={p.stage} />
-                </div>
-                <h3 className="h-card mt-16">{p.title}</h3>
-                <p className="mt-4 flex-1 text-[15px] leading-7 text-muted">{p.summary}</p>
-                <p className="mt-8 border-t rule-soft pt-5 text-xs uppercase tracking-[0.16em] text-dim">
-                  Seeking: <span className="text-[#c6d0e0]">{p.seeking.join(' · ')}</span>
-                </p>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-        <p className="mt-8 text-sm text-dim">Projects are presented at a high level to protect intellectual property. Technical details are shared under NDA.</p>
-      </Section>
-
-      {/* PROCESS */}
-      <Section>
-        <SectionHead kicker="How we innovate" title={<>From first idea <em>to global market.</em></>} />
-        <ol className="grid gap-y-12 sm:grid-cols-2 lg:grid-cols-6">
+      {/* ───────── PROCESS ───────── */}
+      <Section tone="soft">
+        <SectionHeader eyebrow="How we innovate" title="From first idea to global market" center />
+        <ol className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-6 lg:gap-4">
+          <span aria-hidden className="absolute left-[8%] right-[8%] top-7 hidden h-0.5 bg-gradient-to-r from-amber-400 via-orange-400 to-sky-500 lg:block" />
           {process.map((s, i) => (
-            <Reveal as="li" key={s.title} delay={i * 80} className="border-t rule pr-6 pt-6">
-              <span className="num text-lg">0{i + 1}</span>
-              <h3 className="mt-3 text-[15px] font-medium tracking-wide">{s.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted">{s.body}</p>
+            <Reveal as="li" key={s.title} delay={i * 70} className="relative flex gap-4 lg:flex-col lg:items-center lg:text-center">
+              <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full bg-white font-[family-name:var(--font-display)] text-lg font-semibold text-brand shadow-[0_6px_20px_-6px_rgba(22,115,230,0.4)] ring-1 ring-line">
+                {i + 1}
+              </span>
+              <div>
+                <h3 className="h3 !text-[1.05rem] lg:mt-4">{s.title}</h3>
+                <p className="mt-1.5 text-[14.5px] leading-6 text-body">{s.body}</p>
+              </div>
             </Reveal>
           ))}
         </ol>
+        <div className="mt-12 text-center">
+          <TextLink href="/innovation">Our innovation approach</TextLink>
+        </div>
       </Section>
 
-      {/* IN THE FIELD */}
+      {/* ───────── WHO WE WORK WITH ───────── */}
       <Section>
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <SectionHead kicker="In the field" title={<>Conferences, factories, <em>global partners.</em></>} className="!mb-0" />
-          <ArrowLink href="/about#moments">More moments</ArrowLink>
+        <SectionHeader eyebrow="Built for partnership" title="Who we work with" intro="We’re looking for partners who can see an opportunity early." center />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {audiences.map((a, i) => {
+            const Icon = audienceIcons[i]
+            return (
+              <Reveal key={a.title} delay={i * 80} className="card hoverable p-7">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white">
+                  <Icon size={22} aria-hidden />
+                </span>
+                <h3 className="h3 mt-5">{a.title}</h3>
+                <p className="mt-2 text-[15.5px] leading-7 text-body">{a.body}</p>
+              </Reveal>
+            )
+          })}
         </div>
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
+      </Section>
+
+      {/* ───────── IN THE FIELD ───────── */}
+      <Section tone="soft">
+        <SectionHeader
+          eyebrow="In the field"
+          title="Conferences, factories and global partners"
+          action={<Button href="/about#moments" kind="outline">See all moments</Button>}
+        />
+        <div className="grid gap-5 md:grid-cols-3">
           {[gallery[0], gallery[1], gallery[2]].map((g, i) => (
-            <Reveal key={g.src} delay={i * 120}>
-              <figure className="group">
-                <div className="overflow-hidden">
-                  <Image src={g.src} alt={g.alt} width={g.w} height={g.h} sizes="(min-width:768px) 33vw, 100vw" className={`photo aspect-[4/5] w-full object-cover ${g.h > g.w ? 'object-[center_20%]' : 'object-center'}`} />
+            <Reveal key={g.src} delay={i * 100}>
+              <figure className="card group h-full overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image src={g.src} alt={g.alt} fill sizes="(min-width:768px) 33vw, 100vw" className={`card-img object-cover ${g.h > g.w ? 'object-[center_20%]' : ''}`} />
                 </div>
-                <figcaption className="mt-4 text-sm leading-6 text-muted">{g.caption}</figcaption>
+                <figcaption className="p-5 text-[15px] leading-6 text-body">{g.caption}</figcaption>
               </figure>
             </Reveal>
           ))}
         </div>
       </Section>
 
-      {/* AUDIENCES */}
-      <Section>
-        <SectionHead kicker="Built for partnership" title={<>Who we <em>work with.</em></>} />
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {audiences.map((a, i) => (
-            <Reveal key={a.title} delay={i * 80} className="border-l rule pl-6">
-              <h3 className="h-card">{a.title}</h3>
-              <p className="mt-4 text-[15px] leading-7 text-muted">{a.body}</p>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
       <CtaBand
-        title={<>Have capital, capability or expertise? <em>Let’s build what’s next.</em></>}
-        body="We’re building long-term partnerships with investors, manufacturers, technology companies and research institutions."
+        image={img.windSunset}
+        title={<>Have capital, capability or expertise? <span className="sun-text">Let’s build what’s next.</span></>}
+        intro="We’re building long-term partnerships with investors, manufacturers, technology companies and research institutions."
         secondary={{ href: '/investment', label: 'View opportunities' }}
       />
     </>

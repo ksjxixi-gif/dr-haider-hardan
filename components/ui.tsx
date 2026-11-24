@@ -1,82 +1,122 @@
+import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 import type { ReactNode } from 'react'
+import type { Img } from '@/content/images'
 import { Reveal } from './Reveal'
-import { HeroArt } from './HeroArt'
 
-export function Logo({ size = 26 }: { size?: number }) {
+export function Logo({ light = false, size = 34 }: { light?: boolean; size?: number }) {
   return (
-    <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="url(#seeh-logo-g)" strokeWidth="1.5" aria-hidden="true">
-      <defs>
-        <linearGradient id="seeh-logo-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#ffc35e" />
-          <stop offset="0.55" stopColor="#ff8a3d" />
-          <stop offset="1" stopColor="#3dd5f3" />
-        </linearGradient>
-      </defs>
-      <path d="M16 3S7 13.5 7 19.5a9 9 0 0 0 18 0C25 13.5 16 3 16 3Z" />
-      <path d="M12 23c0-5 3.5-8 8-8 0 4.5-3 8-8 8Z" />
-    </svg>
+    <span className="flex items-center gap-3">
+      <svg viewBox="0 0 40 40" width={size} height={size} aria-hidden="true">
+        <defs>
+          <linearGradient id={light ? 'lg-l' : 'lg-d'} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#fbbf24" />
+            <stop offset="0.5" stopColor="#f97316" />
+            <stop offset="1" stopColor="#0ea5e9" />
+          </linearGradient>
+        </defs>
+        <circle cx="20" cy="20" r="19" fill={light ? 'rgba(255,255,255,0.12)' : '#0a1b3d'} />
+        <g fill="none" stroke={`url(#${light ? 'lg-l' : 'lg-d'})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20 8s-8 9.5-8 15a8 8 0 0 0 16 0c0-5.5-8-15-8-15Z" />
+          <path d="M16.5 27c0-4.5 3-7 7-7 0 4-2.7 7-7 7Z" />
+        </g>
+      </svg>
+      <span className="leading-none">
+        <span className={`block font-[family-name:var(--font-display)] text-[19px] font-semibold tracking-[0.14em] ${light ? 'text-white' : 'text-ink'}`}>SEEH</span>
+        <span className={`mt-1 block text-[9.5px] font-medium uppercase tracking-[0.12em] ${light ? 'text-white/70' : 'text-body'}`}>Sustainability for Energy &amp; Health</span>
+      </span>
+    </span>
   )
 }
 
-export function Arrow() {
-  return <span aria-hidden="true">→</span>
-}
-
-export function ButtonLink({ href, children, variant = 'line' }: { href: string; children: ReactNode; variant?: 'line' | 'gold' }) {
+type BtnKind = 'primary' | 'blue' | 'outline' | 'glass'
+export function Button({ href, children, kind = 'primary', arrow = true }: { href: string; children: ReactNode; kind?: BtnKind; arrow?: boolean }) {
   return (
-    <Link href={href} className={`btn ${variant === 'gold' ? 'btn-gold' : 'btn-line'}`}>
+    <Link href={href} className={`btn btn-${kind}`}>
       {children}
+      {arrow && <ArrowRight size={18} strokeWidth={2.2} aria-hidden />}
     </Link>
   )
 }
 
-export function ArrowLink({ href, children }: { href: string; children: ReactNode }) {
+export function TextLink({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <Link href={href} className="link-arrow">
-      {children} <Arrow />
+    <Link href={href} className="link">
+      {children} <ArrowRight size={16} strokeWidth={2.4} aria-hidden />
     </Link>
   )
 }
 
-export function Section({ children, className = '', id }: { children: ReactNode; className?: string; id?: string }) {
+type Tone = 'white' | 'soft' | 'navy'
+const toneCls: Record<Tone, string> = {
+  white: 'bg-white',
+  soft: 'bg-soft',
+  navy: 'on-dark bg-navy-900 text-white',
+}
+export function Section({ children, tone = 'white', className = '', id }: { children: ReactNode; tone?: Tone; className?: string; id?: string }) {
   return (
-    <section id={id} className={`border-t rule-soft py-24 md:py-32 ${className}`}>
-      <div className="wrap">{children}</div>
+    <section id={id} className={`relative py-20 md:py-28 ${toneCls[tone]} ${className}`}>
+      <div className="wrap relative">{children}</div>
     </section>
   )
 }
 
-export function SectionHead({ kicker, title, children, className = '' }: { kicker: string; title: ReactNode; children?: ReactNode; className?: string }) {
+export function SectionHeader({
+  eyebrow,
+  title,
+  intro,
+  center = false,
+  action,
+}: {
+  eyebrow: string
+  title: ReactNode
+  intro?: ReactNode
+  center?: boolean
+  action?: ReactNode
+}) {
   return (
-    <Reveal className={`mb-14 md:mb-20 max-w-3xl ${className}`}>
-      <p className="kicker mb-6">{kicker}</p>
-      <h2 className="h-sec">{title}</h2>
-      {children && <div className="lead mt-6">{children}</div>}
+    <Reveal className={`mb-12 flex flex-col gap-6 md:mb-16 ${center ? 'items-center text-center' : 'md:flex-row md:items-end md:justify-between'}`}>
+      <div className={center ? 'max-w-3xl' : 'max-w-2xl'}>
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 className="h2 mt-4">{title}</h2>
+        {intro && <p className="lead mt-5">{intro}</p>}
+      </div>
+      {action && <div className="shrink-0">{action}</div>}
     </Reveal>
   )
 }
 
-export function PageHero({ kicker, title, children }: { kicker: string; title: ReactNode; children?: ReactNode }) {
+export function PageHero({ eyebrow, title, intro, image, children }: { eyebrow: string; title: ReactNode; intro?: ReactNode; image: Img; children?: ReactNode }) {
   return (
-    <section className="relative overflow-hidden pt-20 pb-24 md:pt-28 md:pb-32">
-      <HeroArt className="pointer-events-none absolute inset-0 h-full w-full opacity-40 [mask-image:linear-gradient(to_left,black_10%,transparent_75%)]" />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink to-transparent" />
-      <div className="wrap relative">
-        <Reveal>
-          <p className="kicker mb-8">{kicker}</p>
-          <h1 className="display max-w-5xl">{title}</h1>
-          {children && <div className="lead mt-10 max-w-2xl">{children}</div>}
+    <section className="on-dark relative -mt-[76px] overflow-hidden bg-navy-900 pt-[76px] text-white">
+      <Image src={image.src} alt="" fill priority sizes="100vw" className="object-cover" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-900/80 to-navy-900/30" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy-950/60 to-transparent" />
+      <div className="wrap relative py-20 md:py-28">
+        <Reveal className="max-w-3xl">
+          <p className="eyebrow">{eyebrow}</p>
+          <h1 className="h1 mt-5">{title}</h1>
+          {intro && <p className="lead mt-6 max-w-2xl">{intro}</p>}
+          {children}
         </Reveal>
       </div>
     </section>
   )
 }
 
-export function StageTag({ stage }: { stage: string }) {
+const stageStyle: Record<string, string> = {
+  Concept: 'bg-slate-100 text-slate-700',
+  Research: 'bg-sky-50 text-sky-700',
+  Development: 'bg-blue-50 text-blue-700',
+  Prototype: 'bg-indigo-50 text-indigo-700',
+  'Patent pending': 'bg-amber-50 text-amber-700',
+  Ready: 'bg-emerald-50 text-emerald-700',
+}
+export function StageBadge({ stage }: { stage: string }) {
   return (
-    <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-muted">
-      <span className="h-1.5 w-1.5 rotate-45 bg-gold" aria-hidden />
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${stageStyle[stage] ?? 'bg-slate-100 text-slate-700'}`}>
+      <span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden />
       {stage}
     </span>
   )
@@ -84,27 +124,36 @@ export function StageTag({ stage }: { stage: string }) {
 
 export function CtaBand({
   title,
-  body,
+  intro,
   primary = { href: '/contact', label: 'Start a conversation' },
   secondary,
+  image,
 }: {
   title: ReactNode
-  body: ReactNode
+  intro: ReactNode
   primary?: { href: string; label: string }
   secondary?: { href: string; label: string }
+  image: Img
 }) {
   return (
-    <section className="border-t rule py-28 md:py-36">
+    <section className="bg-white py-16 md:py-24">
       <div className="wrap">
-        <Reveal className="grid gap-12 md:grid-cols-[1.4fr_1fr] md:items-end">
-          <div>
-            <p className="kicker mb-6">Let’s talk</p>
-            <h2 className="h-sec">{title}</h2>
-            <p className="lead mt-6 max-w-xl">{body}</p>
-          </div>
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center md:justify-end">
-            <ButtonLink href={primary.href}>{primary.label}</ButtonLink>
-            {secondary && <ArrowLink href={secondary.href}>{secondary.label}</ArrowLink>}
+        <Reveal className="on-dark relative overflow-hidden rounded-[28px] bg-navy-900 text-white">
+          <Image src={image.src} alt="" fill sizes="(min-width:1280px) 1200px, 100vw" className="object-cover" />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-900/80 to-navy-900/20" />
+          <div className="relative grid gap-10 px-7 py-14 md:px-14 md:py-20 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+            <div>
+              <h2 className="h2">{title}</h2>
+              <p className="lead mt-5 max-w-xl">{intro}</p>
+            </div>
+            <div className="flex flex-col gap-4 sm:flex-row lg:justify-end">
+              <Button href={primary.href}>{primary.label}</Button>
+              {secondary && (
+                <Button href={secondary.href} kind="glass" arrow={false}>
+                  {secondary.label}
+                </Button>
+              )}
+            </div>
           </div>
         </Reveal>
       </div>

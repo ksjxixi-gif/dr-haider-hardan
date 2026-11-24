@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { ArrowRight, Menu, X } from 'lucide-react'
 import { nav } from '@/content/site'
 import { Logo } from './ui'
 
@@ -13,7 +14,7 @@ export function Header() {
 
   useEffect(() => setOpen(false), [pathname])
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -25,66 +26,76 @@ export function Header() {
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
+  // Every page starts with a dark photo hero, so the bar is transparent/white-text until scrolled.
+  const solid = scrolled || open
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-[background-color,border-color] duration-500 ${
-        scrolled || open ? 'border-b rule-soft bg-ink/90 backdrop-blur-md' : 'border-b border-transparent'
+      className={`sticky top-0 z-50 h-[76px] transition-[background-color,box-shadow] duration-300 ${
+        solid ? 'bg-white/95 shadow-[0_1px_0_#e3eaf3,0_8px_30px_-12px_rgba(11,27,58,0.15)] backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-      <div className="wrap flex h-20 items-center justify-between md:h-24">
-        <Link href="/" className="flex items-center gap-3.5" aria-label="SEEH home">
-          <Logo />
-          <span className="text-[14px] font-medium tracking-[0.42em]">SEEH</span>
+      <div className="wrap flex h-full items-center justify-between gap-6">
+        <Link href="/" aria-label="SEEH home" className="shrink-0">
+          <Logo light={!solid} />
         </Link>
 
-        <nav className="hidden items-center gap-9 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
           {nav.map((n) => (
             <Link
               key={n.href}
               href={n.href}
               aria-current={isActive(n.href) ? 'page' : undefined}
-              className={`text-[13px] tracking-[0.08em] transition-colors hover:text-ivory ${isActive(n.href) ? 'text-gold' : 'text-muted'}`}
+              className={`rounded-full px-3.5 py-2 text-[15px] font-medium transition-colors ${
+                solid
+                  ? isActive(n.href)
+                    ? 'bg-blue-50 text-brand'
+                    : 'text-ink hover:bg-soft hover:text-brand'
+                  : isActive(n.href)
+                    ? 'bg-white/15 text-white'
+                    : 'text-white/85 hover:bg-white/10 hover:text-white'
+              }`}
             >
               {n.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-6">
-          <Link
-            href="/contact"
-            className="hidden border-b border-gold pb-1 text-[13px] tracking-[0.08em] text-gold transition-colors hover:text-gold-2 sm:inline"
-          >
-            Contact
+        <div className="flex items-center gap-3">
+          <Link href="/contact" className="btn btn-primary hidden !h-11 !px-5 !text-[15px] sm:inline-flex">
+            Contact us
           </Link>
           <button
             type="button"
-            className="flex h-11 w-11 flex-col items-center justify-center gap-[7px] lg:hidden"
+            className={`grid h-11 w-11 place-items-center rounded-full lg:hidden ${solid ? 'bg-soft text-ink' : 'bg-white/15 text-white'}`}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((o) => !o)}
           >
-            <span className={`block h-px w-6 bg-ivory transition-transform duration-300 ${open ? 'translate-y-[4px] rotate-45' : ''}`} />
-            <span className={`block h-px w-6 bg-ivory transition-transform duration-300 ${open ? '-translate-y-[4px] -rotate-45' : ''}`} />
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      <div
-        id="mobile-menu"
-        hidden={!open}
-        className="h-[calc(100dvh-5rem)] overflow-y-auto border-t rule-soft bg-ink lg:hidden"
-      >
-        <nav className="wrap flex flex-col py-10" aria-label="Mobile">
-          {[...nav, { href: '/contact', label: 'Contact' }].map((n, i) => (
-            <Link key={n.href} href={n.href} className="flex items-baseline gap-5 border-b rule-soft py-5">
-              <span className="num text-sm">0{i + 1}</span>
-              <span className={`font-serif text-4xl font-light ${isActive(n.href) ? 'text-gold-2' : ''}`}>{n.label}</span>
+      <div id="mobile-menu" hidden={!open} className="h-[calc(100dvh-76px)] overflow-y-auto border-t border-line bg-white lg:hidden">
+        <nav className="wrap flex flex-col py-6" aria-label="Mobile">
+          {[{ href: '/', label: 'Home' }, ...nav].map((n) => (
+            <Link
+              key={n.href}
+              href={n.href}
+              className={`flex items-center justify-between border-b border-line py-4 text-lg font-semibold ${
+                (n.href === '/' ? pathname === '/' : isActive(n.href)) ? 'text-brand' : 'text-ink'
+              }`}
+            >
+              {n.label}
+              <ArrowRight size={18} className="text-slate-400" aria-hidden />
             </Link>
           ))}
+          <Link href="/contact" className="btn btn-primary mt-8">
+            Contact us
+          </Link>
         </nav>
       </div>
     </header>

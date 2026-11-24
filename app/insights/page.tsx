@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 import { insights } from '@/content/insights'
+import { img } from '@/content/images'
 import { PageHero, Section } from '@/components/ui'
 import { Reveal } from '@/components/Reveal'
 import { SocialButtons } from '@/components/icons'
-import { site } from '@/content/site'
 
 export const metadata: Metadata = {
   title: 'News & Insights',
@@ -16,56 +17,52 @@ const fmtDate = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'n
 
 export default function Insights() {
   const sorted = [...insights].sort((a, b) => b.date.localeCompare(a.date))
-  const [first, ...rest] = sorted
   return (
     <>
-      <PageHero kicker="News & Insights" title={<>Ideas, <em>out loud.</em></>}>
-        Articles and perspectives on clean energy, artificial intelligence, health and the business of innovation.
-      </PageHero>
+      <PageHero
+        eyebrow="News & Insights"
+        title={<>Ideas, <span className="sun-text">out loud.</span></>}
+        intro="Articles and perspectives on clean energy, artificial intelligence, health and the business of innovation."
+        image={img.ai}
+      />
 
       <Section>
-        {first && (
-          <Reveal>
-            <Link href={`/insights/${first.slug}`} className="group grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
-              {first.cover && (
-                <div className="overflow-hidden">
-                  <Image src={first.cover.src} alt={first.cover.alt} width={first.cover.w} height={first.cover.h} sizes="(min-width:1024px) 55vw, 100vw" className="photo aspect-[16/11] w-full object-cover" />
-                </div>
-              )}
-              <div>
-                <p className="kicker mb-6">{first.category}</p>
-                <h2 className="h-sec transition-colors group-hover:text-gold-2">{first.title}</h2>
-                <p className="lead mt-6">{first.excerpt}</p>
-                <p className="mt-8 text-xs uppercase tracking-[0.2em] text-dim">{fmtDate(first.date)}</p>
-              </div>
-            </Link>
-          </Reveal>
-        )}
-
-        {rest.length > 0 && (
-          <ul className="mt-24 border-t rule">
-            {rest.map((a) => (
-              <li key={a.slug} className="border-b rule">
-                <Link href={`/insights/${a.slug}`} className="row-hover group grid gap-4 py-10 md:grid-cols-[200px_1fr_auto] md:items-center md:gap-10">
-                  <span className="text-xs uppercase tracking-[0.2em] text-gold">{a.category}</span>
-                  <div>
-                    <h3 className="h-card transition-colors group-hover:text-gold-2">{a.title}</h3>
-                    <p className="mt-3 text-[15px] leading-7 text-muted">{a.excerpt}</p>
+        <div className="grid gap-8 md:grid-cols-2">
+          {sorted.map((a, i) => {
+            const cover = a.cover ?? img.city
+            return (
+              <Reveal key={a.slug} delay={i * 100}>
+                <Link href={`/insights/${a.slug}`} className="card group flex h-full flex-col overflow-hidden">
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image src={cover.src} alt={cover.alt} fill sizes="(min-width:768px) 50vw, 100vw" className="card-img object-cover" />
                   </div>
-                  <span className="text-xs uppercase tracking-[0.2em] text-dim">{fmtDate(a.date)}</span>
+                  <div className="flex flex-1 flex-col p-7">
+                    <div className="flex items-center gap-3 text-sm">
+                      <span className="rounded-full bg-blue-50 px-3 py-1 font-semibold text-brand">{a.category}</span>
+                      <span className="text-body">{fmtDate(a.date)}</span>
+                    </div>
+                    <h2 className="h3 mt-4 !text-[1.45rem]">{a.title}</h2>
+                    <p className="mt-3 flex-1 leading-7 text-body">{a.excerpt}</p>
+                    <span className="link mt-6">
+                      Read article <ArrowRight size={16} strokeWidth={2.4} aria-hidden />
+                    </span>
+                  </div>
                 </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+              </Reveal>
+            )
+          })}
+        </div>
       </Section>
 
-      <section className="border-t rule py-20">
-        <div className="wrap flex flex-col justify-between gap-8 md:flex-row md:items-center">
-          <p className="h-card max-w-xl">Follow Dr. Haider for more on energy, technology and innovation.</p>
+      <Section tone="soft">
+        <div className="card flex flex-col items-start justify-between gap-6 p-8 md:flex-row md:items-center md:p-10">
+          <div>
+            <h2 className="h3 !text-[1.5rem]">Follow Dr. Haider for more</h2>
+            <p className="mt-2 text-body">Regular posts on energy, technology and innovation.</p>
+          </div>
           <SocialButtons withLabel />
         </div>
-      </section>
+      </Section>
     </>
   )
 }

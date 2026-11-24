@@ -41,19 +41,21 @@ export const socialLinks = [
   { href: site.socials.facebook, label: 'Facebook', handle: 'Dr. Haider Hardan', Icon: FacebookIcon },
 ]
 
-export function SocialButtons({ withLabel = false }: { withLabel?: boolean }) {
+export function SocialButtons({ dark = false, withLabel = false }: { dark?: boolean; withLabel?: boolean }) {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap gap-2.5">
       {socialLinks.map(({ href, label, Icon }) => (
         <a
           key={label}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={label}
-          className={`flex h-11 items-center gap-3 border rule text-muted transition-colors hover:border-gold hover:text-gold ${withLabel ? 'px-5 text-sm' : 'w-11 justify-center'}`}
+          aria-label={withLabel ? undefined : label}
+          className={`flex h-11 items-center justify-center gap-2.5 rounded-full text-sm font-medium transition-colors ${withLabel ? 'px-4' : 'w-11'} ${
+            dark ? 'bg-white/10 text-white hover:bg-white/20' : 'border border-line bg-white text-ink hover:border-brand hover:text-brand'
+          }`}
         >
-          <Icon />
+          <Icon size={17} />
           {withLabel && label}
         </a>
       ))}

@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import { useState, type FormEvent } from 'react'
+import { Check, Send } from 'lucide-react'
 import { topicLabels, topics } from '@/lib/contact-schema'
 
 type Topic = (typeof topics)[number]
@@ -46,18 +47,20 @@ export function ContactForm() {
 
   if (state === 'sent') {
     return (
-      <div className="border rule p-10 md:p-14" role="status">
-        <p className="kicker mb-6">Message received</p>
-        <p className="h-sec">Thank you.</p>
-        <p className="lead mt-6">We’ll review your message and get back to you shortly.</p>
+      <div className="rounded-2xl bg-emerald-50 p-8 text-center" role="status">
+        <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-leaf text-white">
+          <Check size={28} strokeWidth={3} aria-hidden />
+        </span>
+        <p className="h3 mt-5 !text-[1.5rem]">Thank you, message received.</p>
+        <p className="mt-2 text-body">We’ll review it and get back to you shortly.</p>
       </div>
     )
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-10" noValidate={false}>
+    <form onSubmit={onSubmit} className="space-y-7">
       <fieldset>
-        <legend className="label mb-5">I’m reaching out about</legend>
+        <legend className="label">What is your enquiry about? *</legend>
         <div className="flex flex-wrap gap-2">
           {topics.map((t) => (
             <button
@@ -65,8 +68,8 @@ export function ContactForm() {
               type="button"
               aria-pressed={topic === t}
               onClick={() => setTopic(t)}
-              className={`h-10 border px-5 text-xs uppercase tracking-[0.16em] transition-colors ${
-                topic === t ? 'border-gold bg-gold text-ink' : 'rule text-muted hover:border-gold hover:text-ivory'
+              className={`h-10 rounded-full px-4 text-[15px] font-medium transition-colors ${
+                topic === t ? 'bg-brand text-white' : 'border border-line bg-white text-ink hover:border-brand hover:text-brand'
               }`}
             >
               {topicLabels[t]}
@@ -76,33 +79,33 @@ export function ContactForm() {
       </fieldset>
 
       {project && (
-        <p className="text-sm text-muted">
-          Regarding project: <span className="text-gold">{project.replace(/-/g, ' ')}</span>
+        <p className="rounded-xl bg-amber-50 px-4 py-3 text-[15px] text-amber-900">
+          About project: <span className="font-semibold capitalize">{project.replace(/-/g, ' ')}</span>
         </p>
       )}
 
-      <div className="grid gap-10 md:grid-cols-2">
-        <label className="block">
-          <span className="label">Full name *</span>
-          <input name="name" required minLength={2} maxLength={120} autoComplete="name" className="field" />
-        </label>
-        <label className="block">
-          <span className="label">Email *</span>
-          <input name="email" type="email" required maxLength={200} autoComplete="email" className="field" />
-        </label>
-        <label className="block">
-          <span className="label">Organisation</span>
-          <input name="organisation" maxLength={160} autoComplete="organization" className="field" />
-        </label>
-        <label className="block">
-          <span className="label">Country</span>
-          <input name="country" maxLength={80} autoComplete="country-name" className="field" />
-        </label>
+      <div className="grid gap-5 md:grid-cols-2">
+        <div>
+          <label htmlFor="cf-name" className="label">Full name *</label>
+          <input id="cf-name" name="name" required minLength={2} maxLength={120} autoComplete="name" className="field" />
+        </div>
+        <div>
+          <label htmlFor="cf-email" className="label">Email *</label>
+          <input id="cf-email" name="email" type="email" required maxLength={200} autoComplete="email" className="field" />
+        </div>
+        <div>
+          <label htmlFor="cf-org" className="label">Organisation</label>
+          <input id="cf-org" name="organisation" maxLength={160} autoComplete="organization" className="field" />
+        </div>
+        <div>
+          <label htmlFor="cf-country" className="label">Country</label>
+          <input id="cf-country" name="country" maxLength={80} autoComplete="country-name" className="field" />
+        </div>
       </div>
-      <label className="block">
-        <span className="label">Message *</span>
-        <textarea name="message" required minLength={10} maxLength={5000} rows={5} className="field resize-y" placeholder="Tell us what you have in mind" />
-      </label>
+      <div>
+        <label htmlFor="cf-msg" className="label">Message *</label>
+        <textarea id="cf-msg" name="message" required minLength={10} maxLength={5000} rows={5} className="field resize-y" placeholder="Tell us briefly what you have in mind" />
+      </div>
 
       {/* honeypot */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
@@ -111,19 +114,20 @@ export function ContactForm() {
         </label>
       </div>
 
-      <label className="flex cursor-pointer items-center gap-4 text-sm text-muted">
-        <input type="checkbox" name="nda" defaultChecked={topic === 'nda'} className="h-4 w-4 accent-[#ffb547]" />
-        I’d like to discuss details under a mutual NDA
+      <label className="flex cursor-pointer items-start gap-3 text-[15px] text-body">
+        <input type="checkbox" name="nda" defaultChecked={topic === 'nda'} className="mt-1 h-4 w-4 accent-[#1673e6]" />
+        I’d like to discuss confidential details under a mutual NDA
       </label>
 
       {state === 'error' && (
-        <p role="alert" className="border-l-2 border-gold pl-4 text-sm text-gold-2">
+        <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-[15px] text-red-700">
           {error}
         </p>
       )}
 
-      <button type="submit" disabled={state === 'sending'} className="btn btn-gold disabled:opacity-60">
+      <button type="submit" disabled={state === 'sending'} className="btn btn-primary w-full disabled:opacity-60 sm:w-auto">
         {state === 'sending' ? 'Sending…' : 'Send message'}
+        <Send size={17} aria-hidden />
       </button>
     </form>
   )
