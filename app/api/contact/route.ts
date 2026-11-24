@@ -38,7 +38,7 @@ export async function POST(req: Request) {
   if (d.website) return Response.json({ ok: true }) // bot: pretend success
 
   const key = process.env.RESEND_API_KEY
-  const to = process.env.CONTACT_TO || 'info@seeh.company'
+  const to = process.env.CONTACT_TO || 'drhaider@seeh.company'
   const from = process.env.CONTACT_FROM || 'SEEH Website <website@seeh.company>'
   if (!key) {
     return Response.json({ error: `The form is not connected yet. Please email ${to} directly.` }, { status: 503 })

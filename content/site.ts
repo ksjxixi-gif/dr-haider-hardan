@@ -7,7 +7,7 @@ export const site = {
   url: 'https://seeh.company',
   founder: 'Dr. Haider N. Hardan',
   location: 'Amman, Jordan',
-  email: 'info@seeh.company', // TODO(client): confirm inbox
+  email: 'drhaider@seeh.company',
   description:
     'Dr. Haider N. Hardan, entrepreneur, inventor and founder of SEEH, develops ventures, products and technologies in clean energy, artificial intelligence and health for global markets.',
   socials: {
