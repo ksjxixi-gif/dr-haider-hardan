@@ -33,8 +33,7 @@ export default function About() {
         <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
           <Reveal className="mx-auto w-full max-w-[460px]">
             <div className="relative">
-              <div aria-hidden className="absolute -inset-3 -z-0 rounded-[32px] bg-gradient-to-br from-amber-300 via-orange-300 to-sky-400 opacity-60 blur-2xl" />
-              <Image src={img.portrait.src} alt={img.portrait.alt} width={440} height={680} priority sizes="(min-width:1024px) 460px, 90vw" className="relative aspect-[4/5] w-full rounded-[28px] object-cover object-top" />
+              <Image src={img.portrait.src} alt={img.portrait.alt} width={440} height={680} priority sizes="(min-width:1024px) 460px, 90vw" className="relative aspect-[4/5] w-full rounded-xl object-cover object-top" />
             </div>
           </Reveal>
           <Reveal delay={120}>
@@ -78,7 +77,7 @@ export default function About() {
             { Icon: Compass, t: 'Approach', b: 'Create new markets instead of competing in saturated ones, through partnership, IP protection and disciplined execution.' },
           ].map(({ Icon, t, b }, i) => (
             <Reveal key={t} delay={i * 90} className="card p-8">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white">
+              <span className="grid h-12 w-12 place-items-center rounded-lg bg-orange-50 text-orange-600">
                 <Icon size={22} aria-hidden />
               </span>
               <h3 className="h3 mt-6">{t}</h3>

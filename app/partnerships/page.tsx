@@ -38,7 +38,7 @@ export default function Partnerships() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {partners.map(({ Icon, t, bring, get }, i) => (
             <Reveal key={t} delay={(i % 3) * 80} className="card flex flex-col p-7">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white">
+              <span className="grid h-12 w-12 place-items-center rounded-lg bg-blue-50 text-brand">
                 <Icon size={22} aria-hidden />
               </span>
               <h3 className="h3 mt-5">{t}</h3>
@@ -64,7 +64,7 @@ export default function Partnerships() {
             <h2 className="h2 mt-4">Models that fit how you work</h2>
             <ul className="mt-8 space-y-3">
               {models.map((m) => (
-                <li key={m} className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line">
+                <li key={m} className="flex items-center gap-4 rounded-lg bg-white p-4 shadow-sm ring-1 ring-line">
                   <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-50 text-leaf">
                     <Check size={16} strokeWidth={3} aria-hidden />
                   </span>
@@ -73,7 +73,7 @@ export default function Partnerships() {
               ))}
             </ul>
           </Reveal>
-          <Reveal delay={120} className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[28px]">
+          <Reveal delay={120} className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-xl">
             <Image src={photo.src} alt={photo.alt} fill sizes="(min-width:1024px) 450px, 90vw" className="object-cover object-[center_20%]" />
             <p className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950/90 to-transparent p-6 pt-16 text-[15px] text-white">{photo.caption}</p>
           </Reveal>

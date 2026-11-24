@@ -31,7 +31,7 @@ export default async function Article({ params }: PageProps<'/insights/[slug]'>)
 
   return (
     <article>
-      <header className="on-dark -mt-[76px] bg-navy-900 pt-[76px] text-white">
+      <header className="on-dark bg-navy-900 text-white">
         <div className="wrap max-w-[880px] py-14 md:py-20">
           <Link href="/insights" className="inline-flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white">
             <ArrowLeft size={16} aria-hidden /> All insights
@@ -52,12 +52,12 @@ export default async function Article({ params }: PageProps<'/insights/[slug]'>)
       <div className="bg-white pb-24">
         {a.cover && (
           <div className="wrap max-w-[1000px] pt-12">
-            <Image src={a.cover.src} alt={a.cover.alt} width={a.cover.w} height={a.cover.h} priority sizes="(min-width:1000px) 1000px, 100vw" className="w-full rounded-3xl" />
+            <Image src={a.cover.src} alt={a.cover.alt} width={a.cover.w} height={a.cover.h} priority sizes="(min-width:1000px) 1000px, 100vw" className="w-full rounded-xl" />
           </div>
         )}
         <div className="prose-article wrap mt-12 max-w-[760px]">
           {a.body.map((para, i) => (para.startsWith('## ') ? <h2 key={i}>{para.slice(3)}</h2> : <p key={i}>{para}</p>))}
-          <div className="mt-14 flex flex-col gap-5 rounded-3xl bg-soft p-7 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-14 flex flex-col gap-5 rounded-xl bg-soft p-7 sm:flex-row sm:items-center sm:justify-between">
             <p className="font-semibold">Enjoyed this? Follow for more.</p>
             <SocialButtons />
           </div>

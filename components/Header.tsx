@@ -26,19 +26,17 @@ export function Header() {
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
-  // Every page starts with a dark photo hero, so the bar is transparent/white-text until scrolled.
-  const solid = scrolled || open
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
 
   return (
     <header
       className={`sticky top-0 z-50 h-[76px] transition-[background-color,box-shadow] duration-300 ${
-        solid ? 'bg-white/95 shadow-[0_1px_0_#e3eaf3,0_8px_30px_-12px_rgba(11,27,58,0.15)] backdrop-blur-md' : 'bg-transparent'
+        scrolled || open ? 'bg-white shadow-[0_1px_0_#e3eaf3]' : 'bg-white shadow-[0_1px_0_#eef2f7]'
       }`}
     >
       <div className="wrap flex h-full items-center justify-between gap-6">
         <Link href="/" aria-label="SEEH home" className="shrink-0">
-          <Logo light={!solid} />
+          <Logo />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
@@ -47,14 +45,8 @@ export function Header() {
               key={n.href}
               href={n.href}
               aria-current={isActive(n.href) ? 'page' : undefined}
-              className={`rounded-full px-3.5 py-2 text-[15px] font-medium transition-colors ${
-                solid
-                  ? isActive(n.href)
-                    ? 'bg-blue-50 text-brand'
-                    : 'text-ink hover:bg-soft hover:text-brand'
-                  : isActive(n.href)
-                    ? 'bg-white/15 text-white'
-                    : 'text-white/85 hover:bg-white/10 hover:text-white'
+              className={`px-3 py-2 text-[15px] font-medium transition-colors ${
+                isActive(n.href) ? 'text-ink underline decoration-orange-500 decoration-2 underline-offset-[10px]' : 'text-body hover:text-ink'
               }`}
             >
               {n.label}
@@ -68,7 +60,7 @@ export function Header() {
           </Link>
           <button
             type="button"
-            className={`grid h-11 w-11 place-items-center rounded-full lg:hidden ${solid ? 'bg-soft text-ink' : 'bg-white/15 text-white'}`}
+            className={`grid h-11 w-11 place-items-center rounded-full lg:hidden bg-soft text-ink`}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             aria-controls="mobile-menu"

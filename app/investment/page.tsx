@@ -55,7 +55,7 @@ export default function Investment() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {why.map(({ Icon, t, b }, i) => (
             <Reveal key={t} delay={i * 80} className="card p-7">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white">
+              <span className="grid h-12 w-12 place-items-center rounded-lg bg-orange-50 text-orange-600">
                 <Icon size={22} aria-hidden />
               </span>
               <h3 className="h3 mt-5">{t}</h3>
@@ -101,7 +101,7 @@ export default function Investment() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {models.map(({ Icon, t, b }, i) => (
             <Reveal key={t} delay={(i % 3) * 80} className="card hoverable flex gap-5 p-7">
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 text-brand">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-blue-50 text-brand">
                 <Icon size={22} aria-hidden />
               </span>
               <div>
@@ -117,9 +117,9 @@ export default function Investment() {
         <SectionHeader eyebrow="Process" title="How an investment conversation works" center />
         <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map(({ Icon, t, b }, i) => (
-            <Reveal as="li" key={t} delay={i * 80} className="rounded-3xl border border-white/10 bg-white/5 p-7">
+            <Reveal as="li" key={t} delay={i * 80} className="rounded-xl border border-white/10 bg-white/5 p-7">
               <div className="flex items-center justify-between">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-amber-300">
+                <span className="grid h-12 w-12 place-items-center rounded-lg bg-white/10 text-amber-300">
                   <Icon size={22} aria-hidden />
                 </span>
                 <span className="font-[family-name:var(--font-display)] text-3xl font-semibold text-white/15">0{i + 1}</span>

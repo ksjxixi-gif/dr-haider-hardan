@@ -36,7 +36,7 @@ export default function Innovation() {
         <div className="grid gap-14 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <SectionHeader eyebrow="Our process" title="Six stages. No shortcuts." intro="Every project moves through the same gates, so partners always know where it stands and what comes next." />
-            <div className="relative -mt-4 hidden aspect-[4/3] overflow-hidden rounded-3xl lg:block">
+            <div className="relative -mt-4 hidden aspect-[4/3] overflow-hidden rounded-xl lg:block">
               <Image src={img.inventor.src} alt={img.inventor.alt} fill sizes="40vw" className="object-cover" />
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function Innovation() {
             { Icon: Layers, t: 'Staged disclosure', b: 'Information is opened up as trust and commitment grow on both sides.' },
           ].map(({ Icon, t, b }, i) => (
             <Reveal key={t} delay={i * 90} className="card p-8 text-center">
-              <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-amber-50 text-amber-600">
+              <span className="mx-auto grid h-14 w-14 place-items-center rounded-lg bg-amber-50 text-amber-600">
                 <Icon size={26} aria-hidden />
               </span>
               <h3 className="h3 mt-5">{t}</h3>

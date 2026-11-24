@@ -89,17 +89,21 @@ export function SectionHeader({
 
 export function PageHero({ eyebrow, title, intro, image, children }: { eyebrow: string; title: ReactNode; intro?: ReactNode; image: Img; children?: ReactNode }) {
   return (
-    <section className="on-dark relative -mt-[76px] overflow-hidden bg-navy-900 pt-[76px] text-white">
-      <Image src={image.src} alt="" fill priority sizes="100vw" className="object-cover" />
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-900/80 to-navy-900/30" />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy-950/60 to-transparent" />
-      <div className="wrap relative py-20 md:py-28">
-        <Reveal className="max-w-3xl">
-          <p className="eyebrow">{eyebrow}</p>
-          <h1 className="h1 mt-5">{title}</h1>
-          {intro && <p className="lead mt-6 max-w-2xl">{intro}</p>}
-          {children}
+    <section className="bg-white">
+      <div className="wrap pt-14 md:pt-20">
+        <Reveal className="grid gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <p className="eyebrow">{eyebrow}</p>
+            <h1 className="h1 mt-5">{title}</h1>
+          </div>
+          <div className="lg:col-span-5 lg:pb-2">
+            {intro && <p className="lead">{intro}</p>}
+            {children}
+          </div>
         </Reveal>
+        <div className="relative mt-12 aspect-[16/9] overflow-hidden rounded-xl md:mt-16 md:aspect-[21/8]">
+          <Image src={image.src} alt={image.alt} fill priority sizes="(min-width:1280px) 1200px, 100vw" className="object-cover" />
+        </div>
       </div>
     </section>
   )
@@ -138,7 +142,7 @@ export function CtaBand({
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="wrap">
-        <Reveal className="on-dark relative overflow-hidden rounded-[28px] bg-navy-900 text-white">
+        <Reveal className="on-dark relative overflow-hidden rounded-xl bg-navy-900 text-white">
           <Image src={image.src} alt="" fill sizes="(min-width:1280px) 1200px, 100vw" className="object-cover" />
           <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-900/80 to-navy-900/20" />
           <div className="relative grid gap-10 px-7 py-14 md:px-14 md:py-20 lg:grid-cols-[1.4fr_1fr] lg:items-center">

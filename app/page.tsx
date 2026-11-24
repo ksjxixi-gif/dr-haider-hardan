@@ -11,57 +11,62 @@ import { SocialButtons } from '@/components/icons'
 
 const audienceIcons = [Coins, Factory, Handshake, FlaskConical]
 
+const mosaic = [
+  { img: img.solarField, label: 'Solar & renewable energy', cls: 'col-span-6 row-span-2 sm:col-span-4' },
+  { img: img.ai, label: 'AI & technology', cls: 'col-span-3 row-span-1 sm:col-span-2 sm:row-span-2' },
+  { img: img.healthyBowl, label: 'Healthy food', cls: 'col-span-3 row-span-1 sm:col-span-2 sm:row-span-2' },
+  { img: img.inventor, label: 'Invention & R&D', cls: 'col-span-3 row-span-1 sm:col-span-2 sm:row-span-2' },
+  { img: img.city, label: 'Business development', cls: 'col-span-3 row-span-1 sm:col-span-2 sm:row-span-2' },
+]
+
 export default function Home() {
   const featured = projects.filter((p) => p.featured)
   return (
     <>
-      {/* ───────── HERO ───────── */}
-      <section className="on-dark relative -mt-[76px] overflow-hidden bg-navy-900 text-white">
-        <Image src={img.heroSolar.src} alt="" fill priority sizes="100vw" className="object-cover object-[center_70%]" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-navy-950/85 via-navy-900/45 to-transparent" />
-        <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy-950/85 via-navy-900/30 to-transparent" />
-
-        <div className="wrap relative flex flex-col justify-center pb-12 pt-32 lg:min-h-[calc(100svh-40px)] lg:pb-48 lg:pt-36">
-          <Reveal className="max-w-3xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
-              <span className="h-2 w-2 rounded-full bg-amber-400" aria-hidden /> Sustainability for Energy &amp; Health
+      {/* ───────── HERO: copy + brand mosaic (the banner, rebuilt as a grid) ───────── */}
+      <section className="border-b border-line bg-white">
+        <div className="wrap grid gap-12 py-12 md:py-16 lg:grid-cols-12 lg:gap-12 lg:py-20">
+          <Reveal className="flex flex-col lg:col-span-5">
+            <p className="text-[13px] font-medium uppercase tracking-[0.08em] text-body">
+              SEEH <span className="mx-2 text-slate-300">/</span> Sustainability for Energy &amp; Health
             </p>
-            <h1 className="h1 mt-6">
-              Turning ideas into <span className="sun-text">sustainable</span> real-world solutions.
+            <h1 className="h1 mt-7">
+              From invention
+              <br />
+              to industry.
             </h1>
-            <p className="lead mt-6 max-w-2xl !text-[#dbe6f5]">
-              Clean energy. Smarter technology. Healthier tomorrow. SEEH develops ventures, products and technologies with global
-              commercial potential, and builds the partnerships to bring them to market.
+            <p className="lead mt-7 max-w-md">
+              SEEH develops clean-energy, artificial-intelligence and health technologies, and takes them to market with investors,
+              manufacturers and research partners.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button href="/projects">Explore our projects</Button>
-              <Button href="/partnerships" kind="glass" arrow={false}>
-                Partner with us
-              </Button>
+            <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <Button href="/projects">View projects</Button>
+              <TextLink href="/partnerships">Partner with SEEH</TextLink>
             </div>
+
+            <Link href="/about" className="group mt-12 flex items-center gap-4 border-t border-line pt-6 lg:mt-auto">
+              <Image src={img.portrait.src} alt="" width={96} height={96} className="h-12 w-12 rounded-full object-cover object-top" />
+              <span className="leading-tight">
+                <span className="block text-sm text-body">Founded by</span>
+                <span className="mt-0.5 block font-semibold text-ink group-hover:text-brand">{site.founder}</span>
+              </span>
+              <ArrowRight size={18} className="ml-auto text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-brand" aria-hidden />
+            </Link>
           </Reveal>
 
-          <Reveal delay={200} className="mt-10 flex items-center gap-4 lg:absolute lg:bottom-48 lg:right-10 lg:mt-0">
-            <Image src={img.portrait.src} alt="" width={64} height={64} className="h-14 w-14 rounded-full object-cover object-top ring-2 ring-white/60" />
-            <div className="leading-tight">
-              <p className="text-xs uppercase tracking-[0.14em] text-white/70">Founded by</p>
-              <p className="mt-1 font-[family-name:var(--font-display)] text-lg font-semibold">{site.founder}</p>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* pillar bar, echoing the brand banner */}
-        <div className="relative lg:absolute lg:inset-x-0 lg:bottom-0">
-          <div className="wrap">
-            <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-t-3xl border border-b-0 border-white/15 bg-white/10 backdrop-blur-md sm:grid-cols-3 lg:grid-cols-5">
-              {sectors.map((s, i) => (
-                <li key={s.key} className={`flex flex-col items-center gap-2.5 bg-navy-950/40 px-3 py-5 text-center md:py-6 ${i === 4 ? 'col-span-2 sm:col-span-1' : ''}`}>
-                  <SectorIcon sector={s.key} plain size={26} className="text-amber-300" />
-                  <span className="text-[13px] font-medium leading-snug text-white/90 md:text-sm">{s.title}</span>
+          <Reveal delay={120} className="lg:col-span-7">
+            <ul className="grid h-[460px] grid-cols-6 grid-rows-4 gap-2.5 sm:h-[560px] lg:h-full lg:min-h-[600px]">
+              {mosaic.map((m, i) => (
+                <li key={m.label} className={`group relative overflow-hidden rounded-lg bg-soft ${m.cls}`}>
+                  <Image src={m.img.src} alt={m.img.alt} fill priority={i < 2} sizes="(min-width:1024px) 40vw, 90vw" className="card-img object-cover" />
+                  <span className="absolute bottom-2 left-2 flex items-center gap-1.5 rounded-md bg-white px-2 py-1 text-[11px] sm:bottom-2.5 sm:left-2.5 sm:gap-2 sm:px-2.5 sm:py-1.5 sm:text-[12.5px] font-semibold text-ink shadow-sm">
+                    <span className="tabular-nums text-orange-600">0{i + 1}</span>
+                    {m.label}
+                  </span>
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -91,15 +96,17 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal delay={120} className="grid grid-cols-2 gap-4">
-            <div className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-3xl">
-              <Image src={img.solarAerial.src} alt={img.solarAerial.alt} fill sizes="(min-width:1024px) 600px, 100vw" className="object-cover" />
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-3xl">
-              <Image src={img.ai.src} alt={img.ai.alt} fill sizes="(min-width:1024px) 300px, 50vw" className="object-cover" />
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-3xl">
-              <Image src={img.healthyBowl.src} alt={img.healthyBowl.alt} fill sizes="(min-width:1024px) 300px, 50vw" className="object-cover" />
+          <Reveal delay={120} className="grid grid-cols-5 gap-3">
+            <figure className="relative col-span-3 aspect-[4/5] overflow-hidden rounded-lg">
+              <Image src={gallery[0].src} alt={gallery[0].alt} fill sizes="(min-width:1024px) 360px, 60vw" className="object-cover" />
+            </figure>
+            <div className="col-span-2 flex flex-col gap-3">
+              <figure className="relative flex-1 overflow-hidden rounded-lg">
+                <Image src={gallery[1].src} alt={gallery[1].alt} fill sizes="(min-width:1024px) 240px, 40vw" className="object-cover object-[center_20%]" />
+              </figure>
+              <p className="rounded-lg bg-soft p-4 text-sm leading-6 text-body">
+                Speaking in Aqaba and meeting manufacturers abroad: SEEH is built on real relationships.
+              </p>
             </div>
           </Reveal>
         </div>
@@ -136,7 +143,7 @@ export default function Home() {
         <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.25),transparent)]" />
         <div className="grid items-center gap-12 lg:grid-cols-[420px_1fr] lg:gap-20">
           <Reveal className="mx-auto w-full max-w-[420px]">
-            <div className="relative overflow-hidden rounded-[28px] ring-1 ring-white/15">
+            <div className="relative overflow-hidden rounded-xl ring-1 ring-white/15">
               <Image src={img.portrait.src} alt={img.portrait.alt} width={440} height={680} sizes="(min-width:1024px) 420px, 90vw" className="aspect-[4/5] w-full object-cover object-top" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950/90 to-transparent p-6 pt-16">
                 <p className="font-[family-name:var(--font-display)] text-xl font-semibold">{site.founder}</p>
@@ -231,7 +238,7 @@ export default function Home() {
             const Icon = audienceIcons[i]
             return (
               <Reveal key={a.title} delay={i * 80} className="card hoverable p-7">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white">
+                <span className="grid h-12 w-12 place-items-center rounded-lg bg-blue-50 text-brand">
                   <Icon size={22} aria-hidden />
                 </span>
                 <h3 className="h3 mt-5">{a.title}</h3>

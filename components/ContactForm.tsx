@@ -47,7 +47,7 @@ export function ContactForm() {
 
   if (state === 'sent') {
     return (
-      <div className="rounded-2xl bg-emerald-50 p-8 text-center" role="status">
+      <div className="rounded-lg bg-emerald-50 p-8 text-center" role="status">
         <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-leaf text-white">
           <Check size={28} strokeWidth={3} aria-hidden />
         </span>

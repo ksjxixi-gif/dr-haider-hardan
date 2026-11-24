@@ -27,7 +27,7 @@ export default function Projects() {
       />
 
       <Section>
-        <div className="mb-10 flex items-start gap-3 rounded-2xl border border-sky-100 bg-sky-50 p-5 text-[15.5px] text-sky-900">
+        <div className="mb-10 flex items-start gap-3 rounded-lg border border-sky-100 bg-sky-50 p-5 text-[15.5px] text-sky-900">
           <ShieldCheck size={22} className="mt-0.5 shrink-0" aria-hidden />
           <p>
             Projects are presented at a high level to protect intellectual property. Technical details are available to qualified

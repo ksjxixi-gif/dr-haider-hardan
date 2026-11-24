@@ -30,7 +30,7 @@ export default async function ProjectPage({ params }: PageProps<'/projects/[slug
 
   return (
     <>
-      <section className="on-dark relative -mt-[76px] overflow-hidden bg-navy-900 pt-[76px] text-white">
+      <section className="on-dark relative overflow-hidden bg-navy-900 text-white">
         <Image src={im.src} alt="" fill priority sizes="100vw" className="object-cover" />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-900/85 to-navy-900/40" />
         <div className="wrap relative py-16 md:py-24">
@@ -69,7 +69,7 @@ export default async function ProjectPage({ params }: PageProps<'/projects/[slug
                   <li key={s} className="text-center">
                     <span
                       className={`mx-auto grid h-9 w-9 place-items-center rounded-full text-sm font-semibold ${
-                        i < stageIdx ? 'bg-leaf text-white' : i === stageIdx ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-white ring-4 ring-amber-100' : 'bg-soft text-slate-400'
+                        i < stageIdx ? 'bg-leaf text-white' : i === stageIdx ? 'bg-orange-50 text-orange-600 ring-4 ring-amber-100' : 'bg-soft text-slate-400'
                       }`}
                     >
                       {i < stageIdx ? <Check size={16} aria-hidden /> : i + 1}

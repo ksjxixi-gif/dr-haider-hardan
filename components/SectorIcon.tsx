@@ -13,7 +13,7 @@ export function SectorIcon({ sector, size = 22, plain = false, className = '' }:
   const { Icon, fg, bg } = map[sector]
   if (plain) return <Icon size={size} strokeWidth={1.8} color="currentColor" aria-hidden className={className} />
   return (
-    <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl ${className}`} style={{ background: bg }}>
+    <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-lg ${className}`} style={{ background: bg }}>
       <Icon size={size} strokeWidth={1.9} color={fg} aria-hidden />
     </span>
   )
