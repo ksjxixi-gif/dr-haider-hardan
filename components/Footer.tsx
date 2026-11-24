@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { nav, site } from '@/content/site'
 import { Logo } from './ui'
-import { LinkedInIcon, XIcon } from './icons'
+import { SocialButtons } from './icons'
 
 export function Footer() {
   return (
@@ -15,13 +15,8 @@ export function Footer() {
           <p className="mt-6 max-w-xs text-sm leading-7 text-muted">
             Sustainability for Energy &amp; Health. Turning bold ideas into products and ventures with real commercial value.
           </p>
-          <div className="mt-8 flex gap-3">
-            <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="grid h-11 w-11 place-items-center border rule text-muted transition-colors hover:border-gold hover:text-gold">
-              <LinkedInIcon />
-            </a>
-            <a href={site.socials.x} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="grid h-11 w-11 place-items-center border rule text-muted transition-colors hover:border-gold hover:text-gold">
-              <XIcon />
-            </a>
+          <div className="mt-8">
+            <SocialButtons />
           </div>
         </div>
         <div>

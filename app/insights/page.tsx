@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { insights } from '@/content/insights'
 import { PageHero, Section } from '@/components/ui'
 import { Reveal } from '@/components/Reveal'
-import { LinkedInIcon, XIcon } from '@/components/icons'
+import { SocialButtons } from '@/components/icons'
 import { site } from '@/content/site'
 
 export const metadata: Metadata = {
@@ -63,10 +63,7 @@ export default function Insights() {
       <section className="border-t rule py-20">
         <div className="wrap flex flex-col justify-between gap-8 md:flex-row md:items-center">
           <p className="h-card max-w-xl">Follow Dr. Haider for more on energy, technology and innovation.</p>
-          <div className="flex gap-3">
-            <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer" className="flex h-12 items-center gap-3 border rule px-5 text-sm text-muted hover:border-gold hover:text-gold"><LinkedInIcon /> LinkedIn</a>
-            <a href={site.socials.x} target="_blank" rel="noopener noreferrer" className="flex h-12 items-center gap-3 border rule px-5 text-sm text-muted hover:border-gold hover:text-gold"><XIcon /> X</a>
-          </div>
+          <SocialButtons withLabel />
         </div>
       </section>
     </>

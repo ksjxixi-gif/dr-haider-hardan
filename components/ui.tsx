@@ -1,10 +1,18 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { Reveal } from './Reveal'
+import { HeroArt } from './HeroArt'
 
 export function Logo({ size = 26 }: { size?: number }) {
   return (
-    <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="#c9a96e" strokeWidth="1.3" aria-hidden="true">
+    <svg viewBox="0 0 32 32" width={size} height={size} fill="none" stroke="url(#seeh-logo-g)" strokeWidth="1.5" aria-hidden="true">
+      <defs>
+        <linearGradient id="seeh-logo-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#ffc35e" />
+          <stop offset="0.55" stopColor="#ff8a3d" />
+          <stop offset="1" stopColor="#3dd5f3" />
+        </linearGradient>
+      </defs>
       <path d="M16 3S7 13.5 7 19.5a9 9 0 0 0 18 0C25 13.5 16 3 16 3Z" />
       <path d="M12 23c0-5 3.5-8 8-8 0 4.5-3 8-8 8Z" />
     </svg>
@@ -52,7 +60,8 @@ export function SectionHead({ kicker, title, children, className = '' }: { kicke
 export function PageHero({ kicker, title, children }: { kicker: string; title: ReactNode; children?: ReactNode }) {
   return (
     <section className="relative overflow-hidden pt-20 pb-24 md:pt-28 md:pb-32">
-      <div aria-hidden className="pointer-events-none absolute -right-60 -top-60 h-[800px] w-[800px] rounded-full bg-[radial-gradient(closest-side,rgba(201,169,110,0.09),transparent)]" />
+      <HeroArt className="pointer-events-none absolute inset-0 h-full w-full opacity-40 [mask-image:linear-gradient(to_left,black_10%,transparent_75%)]" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink to-transparent" />
       <div className="wrap relative">
         <Reveal>
           <p className="kicker mb-8">{kicker}</p>

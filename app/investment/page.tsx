@@ -88,7 +88,7 @@ export default function Investment() {
 
       <Section>
         <SectionHead kicker="Ways to engage" title={<>Flexible <em>engagement models.</em></>} />
-        <div className="grid gap-px bg-[rgba(201,169,110,0.2)] md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-px bg-[rgba(140,170,230,0.16)] md:grid-cols-2 lg:grid-cols-3">
           {models.map(([t, b], i) => (
             <Reveal key={t} delay={(i % 3) * 80} className="bg-ink p-8 md:p-10">
               <span className="num text-lg">0{i + 1}</span>

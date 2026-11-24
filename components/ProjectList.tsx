@@ -41,7 +41,7 @@ export function ProjectList({ projects, filters, sectorTitles }: { projects: Pro
               <div>
                 <p className="text-[15px] leading-7 text-muted">{p.summary}</p>
                 <p className="mt-3 text-xs uppercase tracking-[0.14em] text-dim">
-                  Seeking: <span className="text-[#cfc6b7]">{p.seeking.join(' · ')}</span>
+                  Seeking: <span className="text-[#c6d0e0]">{p.seeking.join(' · ')}</span>
                 </p>
               </div>
               <div className="flex items-center gap-8 md:flex-col md:items-end">

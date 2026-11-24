@@ -42,7 +42,7 @@ export default function Partnerships() {
               </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.2em] text-gold">You get</p>
-                <p className="mt-2 text-[15px] leading-7 text-[#cfc7b9]">{get}</p>
+                <p className="mt-2 text-[15px] leading-7 text-[#c6d0e0]">{get}</p>
               </div>
             </Reveal>
           ))}

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { gallery, site } from '@/content/site'
 import { ArrowLink, CtaBand, Section, SectionHead } from '@/components/ui'
 import { Reveal } from '@/components/Reveal'
-import { LinkedInIcon, XIcon } from '@/components/icons'
+import { SocialButtons } from '@/components/icons'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -31,13 +31,8 @@ export default function About() {
               Dr. Haider N. Hardan is an entrepreneur, inventor and the founder of SEEH, a Jordan-based company that turns
               unconventional ideas into products and ventures with real commercial value.
             </p>
-            <div className="mt-10 flex gap-3">
-              <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer" className="flex h-12 items-center gap-3 border rule px-5 text-sm text-muted transition-colors hover:border-gold hover:text-gold">
-                <LinkedInIcon /> LinkedIn
-              </a>
-              <a href={site.socials.x} target="_blank" rel="noopener noreferrer" className="flex h-12 items-center gap-3 border rule px-5 text-sm text-muted transition-colors hover:border-gold hover:text-gold">
-                <XIcon /> @DrHaiderHardan1
-              </a>
+            <div className="mt-10">
+              <SocialButtons withLabel />
             </div>
           </Reveal>
           <Reveal delay={150} className="mx-auto w-full max-w-[420px] px-4 lg:px-0">
@@ -51,7 +46,7 @@ export default function About() {
       <Section>
         <div className="grid gap-16 lg:grid-cols-[1fr_1.3fr]">
           <SectionHead kicker="The founder" title={<>From the clinic <em>to the lab of ideas.</em></>} className="!mb-0" />
-          <Reveal className="space-y-6 text-[17px] font-light leading-8 text-[#cfc7b9]">
+          <Reveal className="space-y-6 text-[17px] font-light leading-8 text-[#c6d0e0]">
             <p>
               Haider’s path to innovation began in healthcare. Trained as a dental surgeon (B.D.S.) and working in private practice in
               Amman, he developed his first invention directly from clinical problems: a rubber balloon system for endodontic
@@ -74,7 +69,7 @@ export default function About() {
         <SectionHead kicker="The company" title={<>SEEH: Sustainability for <em>Energy &amp; Health.</em></>}>
           A company that brings entrepreneurship, innovation, product development and commercial investment together under one roof.
         </SectionHead>
-        <div className="grid gap-px bg-[rgba(201,169,110,0.2)] md:grid-cols-3">
+        <div className="grid gap-px bg-[rgba(140,170,230,0.16)] md:grid-cols-3">
           {[
             ['Mission', 'Turn promising ideas into products and ventures with real economic value and international growth potential.'],
             ['Vision', 'A future where clean energy, smart technology and healthy living are accessible, affordable and sustainable.'],
@@ -98,7 +93,7 @@ export default function About() {
             <Reveal key={g.src} delay={(i % 2) * 120}>
               <figure className="group">
                 <div className="overflow-hidden">
-                  <Image src={g.src} alt={g.alt} width={g.w} height={g.h} sizes="(min-width:768px) 50vw, 100vw" className="photo aspect-[4/3] w-full object-cover object-center" />
+                  <Image src={g.src} alt={g.alt} width={g.w} height={g.h} sizes="(min-width:768px) 50vw, 100vw" className={`photo aspect-[4/3] w-full object-cover ${g.h > g.w ? 'object-[center_18%]' : 'object-center'}`} />
                 </div>
                 <figcaption className="mt-4 flex gap-4 text-sm text-muted">
                   <span className="num">0{i + 1}</span>

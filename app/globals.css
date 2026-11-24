@@ -1,21 +1,24 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-ink: #0a0908;
-  --color-ink-2: #110f0d;
-  --color-ink-3: #17140f;
-  --color-ivory: #efe8dc;
-  --color-muted: #a59d90;
-  --color-dim: #6f685d;
-  --color-gold: #c9a96e;
-  --color-gold-2: #dcc08a;
+  --color-ink: #050a14;
+  --color-ink-2: #08111f;
+  --color-ink-3: #0c1729;
+  --color-ivory: #eef3fa;
+  --color-muted: #94a1b9;
+  --color-dim: #5f6c85;
+  --color-gold: #ffb547;
+  --color-orange: #ff7a2f;
+  --color-cyan: #3dd5f3;
+  --color-leaf: #5ee38f;
+  --color-gold-2: #ffd28a;
   --font-sans: 'Inter Variable', Inter, system-ui, sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Sora Variable', 'Inter Variable', system-ui, sans-serif;
 }
 
 :root {
-  --line: rgba(201, 169, 110, 0.2);
-  --line-soft: rgba(239, 232, 220, 0.08);
+  --line: rgba(140, 170, 230, 0.16);
+  --line-soft: rgba(238, 243, 250, 0.07);
   color-scheme: dark;
 }
 
@@ -38,7 +41,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 60;
-  opacity: 0.05;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
 }
 ::selection {
@@ -74,27 +77,33 @@ body::before {
   .display {
     font-family: var(--font-serif);
     font-weight: 300;
-    line-height: 0.98;
-    letter-spacing: -0.015em;
-    font-size: clamp(3rem, 7vw, 6.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    font-size: clamp(2.6rem, 6vw, 5.4rem);
   }
   .display em,
-  .h-sec em {
-    font-style: italic;
-    color: var(--color-gold-2);
+  .h-sec em,
+  .grad {
+    font-style: normal;
+    font-weight: 400;
+    background: linear-gradient(95deg, #ffd27a 0%, #ffb547 35%, #ff7a2f 70%, #3dd5f3 130%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
   .h-sec {
     font-family: var(--font-serif);
     font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    font-size: clamp(2.3rem, 4.6vw, 3.9rem);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    font-size: clamp(2rem, 3.9vw, 3.3rem);
   }
   .h-card {
     font-family: var(--font-serif);
     font-weight: 400;
-    font-size: 1.75rem;
-    line-height: 1.15;
+    font-size: 1.35rem;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
   }
   .lead {
     font-size: clamp(1rem, 1.3vw, 1.125rem);
@@ -104,7 +113,10 @@ body::before {
   }
   .num {
     font-family: var(--font-serif);
-    font-style: italic;
+    font-weight: 500;
+    font-size: 0.8125rem !important;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
     color: var(--color-gold);
   }
   .rule {
@@ -137,11 +149,12 @@ body::before {
     color: var(--color-ink);
   }
   .btn-gold {
-    background: var(--color-gold);
-    color: var(--color-ink);
+    background: linear-gradient(95deg, #ffc35e, #ff8a3d);
+    color: #1a0d02;
+    box-shadow: 0 10px 40px -10px rgba(255, 140, 50, 0.55);
   }
   .btn-gold:hover {
-    background: var(--color-gold-2);
+    filter: brightness(1.08);
   }
   .link-arrow {
     display: inline-flex;
@@ -166,11 +179,11 @@ body::before {
   }
 
   .photo {
-    filter: grayscale(0.85) sepia(0.18) contrast(1.05) brightness(0.92);
+    filter: saturate(0.8) contrast(1.05) brightness(0.88);
     transition: filter 0.8s ease, transform 1.2s ease;
   }
   .group:hover .photo {
-    filter: grayscale(0) sepia(0) contrast(1) brightness(1);
+    filter: saturate(1) contrast(1) brightness(1);
     transform: scale(1.02);
   }
 
@@ -181,7 +194,7 @@ body::before {
     content: '';
     position: absolute;
     inset: -14px 14px 14px -14px;
-    border: 1px solid rgba(201, 169, 110, 0.45);
+    border: 1px solid rgba(255, 181, 71, 0.45);
     pointer-events: none;
   }
 
@@ -189,7 +202,7 @@ body::before {
     transition: background-color 0.4s;
   }
   .row-hover:hover {
-    background: rgba(201, 169, 110, 0.04);
+    background: rgba(61, 213, 243, 0.035);
   }
 
   .field {
@@ -218,7 +231,7 @@ body::before {
   }
 
   .prose-article p {
-    color: #cfc7b9;
+    color: #c6d0e0;
     font-weight: 300;
     font-size: 1.125rem;
     line-height: 1.9;
@@ -227,7 +240,8 @@ body::before {
   .prose-article h2 {
     font-family: var(--font-serif);
     font-weight: 400;
-    font-size: 2rem;
+    letter-spacing: -0.02em;
+    font-size: 1.65rem;
     line-height: 1.2;
     margin: 3rem 0 1.25rem;
     color: var(--color-ivory);
@@ -247,4 +261,15 @@ body::before {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .photo, .group:hover .photo { transition: none; transform: none; }
+}
+
+/* hero art animation */
+@keyframes ha-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes ha-flow { to { stroke-dashoffset: -40; } }
+@keyframes ha-breathe { 0%, 100% { opacity: 0.85; } 50% { opacity: 1; } }
+.ha-pulse { animation: ha-pulse 3.6s ease-in-out infinite; }
+.ha-flow { stroke-dasharray: 3 7; animation: ha-flow 2.4s linear infinite; }
+.ha-breathe { animation: ha-breathe 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .ha-pulse, .ha-flow, .ha-breathe { animation: none; }
 }

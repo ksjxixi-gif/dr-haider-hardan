@@ -4,55 +4,41 @@ import { audiences, gallery, process, sectors, site } from '@/content/site'
 import { projects } from '@/content/projects'
 import { ArrowLink, ButtonLink, CtaBand, Section, SectionHead, StageTag } from '@/components/ui'
 import { Reveal } from '@/components/Reveal'
+import { HeroArt } from '@/components/HeroArt'
+import { SectorIcon } from '@/components/SectorIcon'
+import { SocialButtons } from '@/components/icons'
 
 export default function Home() {
   const featured = projects.filter((p) => p.featured)
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div aria-hidden className="pointer-events-none absolute -right-72 -top-72 h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(closest-side,rgba(201,169,110,0.11),transparent)]" />
-        <div className="wrap relative grid items-center gap-16 pb-20 pt-10 md:pt-16 lg:grid-cols-[1fr_400px] lg:gap-20 xl:grid-cols-[1fr_440px]">
-          <Reveal>
-            <p className="kicker mb-8 md:mb-10">Sustainability for Energy &amp; Health</p>
-            <h1 className="display">
-              Where bold ideas
-              <br />
-              become <em>industries.</em>
-            </h1>
-            <p className="lead mt-10 max-w-xl">
-              {site.founder}, entrepreneur, inventor and founder of SEEH, builds ventures in clean energy, artificial intelligence and
-              health for global markets.
-            </p>
-            <div className="mt-12 flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-10">
-              <ButtonLink href="/partnerships">Partner with us</ButtonLink>
-              <ArrowLink href="/projects">Explore the work</ArrowLink>
-            </div>
-          </Reveal>
+      <section className="relative -mt-20 flex min-h-[100svh] flex-col overflow-hidden pt-20 md:-mt-24 md:pt-24">
+        <HeroArt className="absolute inset-0 h-full w-full" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/50 to-ink/30 md:bg-gradient-to-r md:from-ink/95 md:via-ink/60 md:to-transparent" />
+        <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
 
-          <Reveal delay={150} className="mx-auto w-full max-w-[420px] px-4 lg:px-0">
-            <figure className="frame-offset">
-              <Image
-                src="/images/haider-portrait.webp"
-                alt="Portrait of Dr. Haider N. Hardan"
-                width={440}
-                height={680}
-                priority
-                sizes="(min-width:1280px) 440px, (min-width:1024px) 400px, 90vw"
-                className="relative aspect-[440/600] w-full object-cover object-top"
-              />
-              <figcaption className="mt-5 flex justify-between text-[13px]">
-                <span className="font-medium">{site.founder}</span>
-                <span className="text-dim">Founder · {site.location}</span>
-              </figcaption>
-            </figure>
+        <div className="wrap relative flex flex-1 items-center py-16 md:py-24">
+          <Reveal className="max-w-4xl">
+            <p className="kicker mb-8 md:mb-10">SEEH · Sustainability for Energy &amp; Health</p>
+            <h1 className="display lg:!text-[4.6rem]">
+              Turning bold ideas into <em>sustainable</em> real-world solutions.
+            </h1>
+            <p className="lead mt-8 max-w-xl text-[#c6d0e0]">
+              Clean energy, smarter technology and a healthier tomorrow. Founded by {site.founder}, entrepreneur and inventor, SEEH
+              turns unconventional ideas into products and ventures with global potential.
+            </p>
+            <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
+              <ButtonLink href="/projects" variant="gold">Explore our projects</ButtonLink>
+              <ArrowLink href="/partnerships">Partner with us</ArrowLink>
+            </div>
           </Reveal>
         </div>
 
-        <ol className="wrap grid grid-cols-2 border-t rule sm:grid-cols-3 lg:grid-cols-5">
-          {sectors.map((s, i) => (
-            <li key={s.key} className="flex items-baseline gap-3 py-6 text-[13px] tracking-[0.05em] text-[#cfc6b7]">
-              <span className="num text-base">0{i + 1}</span>
+        <ol className="wrap relative grid grid-cols-2 border-t rule sm:grid-cols-3 lg:grid-cols-5">
+          {sectors.map((s) => (
+            <li key={s.key} className="flex items-center gap-3 py-6 text-[13px] tracking-[0.03em] text-[#c6d0e0]">
+              <SectorIcon sector={s.key} size={18} />
               {s.short}
             </li>
           ))}
@@ -60,10 +46,10 @@ export default function Home() {
       </section>
 
       {/* STATEMENT */}
-      <section className="border-t rule-soft py-28 md:py-40">
+      <section className="py-28 md:py-36">
         <Reveal className="wrap text-center">
-          <p className="mx-auto max-w-5xl font-serif text-[clamp(2.2rem,5vw,4.4rem)] font-light leading-[1.1]">
-            “We don’t compete in saturated markets. <em className="text-gold-2">We create new ones.</em>”
+          <p className="mx-auto max-w-4xl font-serif text-[clamp(1.9rem,4vw,3.4rem)] font-light leading-[1.15] tracking-[-0.03em]">
+            “We don’t compete in saturated markets. <span className="grad">We create new ones.</span>”
           </p>
           <p className="lead mx-auto mt-10 max-w-2xl">
             SEEH brings entrepreneurship, invention, product development and investment together, turning unconventional ideas into
@@ -72,17 +58,48 @@ export default function Home() {
         </Reveal>
       </section>
 
+      {/* FOUNDER */}
+      <Section>
+        <div className="grid items-center gap-16 lg:grid-cols-[400px_1fr] lg:gap-24">
+          <Reveal className="mx-auto w-full max-w-[400px] px-4 lg:px-0">
+            <figure className="frame-offset">
+              <Image src="/images/haider-portrait.webp" alt="Portrait of Dr. Haider N. Hardan" width={440} height={680} sizes="(min-width:1024px) 400px, 90vw" className="relative aspect-[440/560] w-full object-cover object-top" />
+            </figure>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="kicker mb-6">The founder</p>
+            <h2 className="h-sec">{site.founder}</h2>
+            <p className="mt-3 text-sm uppercase tracking-[0.2em] text-muted">Entrepreneur · Inventor · Innovator</p>
+            <p className="lead mt-8 max-w-2xl">
+              From inventing in the dental clinic to building ventures in energy, AI and nutrition, Haider works where invention meets
+              business: finding ideas with real commercial potential and carrying them from concept to patent, manufacturing and market.
+            </p>
+            <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-center">
+              <SocialButtons />
+              <ArrowLink href="/about">Full story</ArrowLink>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
       {/* FOCUS AREAS */}
       <Section>
         <SectionHead kicker="What we work on" title={<>Five fields. <em>One mission.</em></>} />
-        <div className="border-t rule">
+        <div className="grid gap-px overflow-hidden rounded-sm bg-[rgba(140,170,230,0.16)] md:grid-cols-2 lg:grid-cols-3">
           {sectors.map((s, i) => (
-            <Reveal key={s.key} className="row-hover grid gap-4 border-b rule py-10 md:grid-cols-[80px_1fr_1.3fr] md:gap-10">
-              <span className="num text-2xl">0{i + 1}</span>
-              <h3 className="h-card">{s.title}</h3>
-              <p className="text-[15px] leading-7 text-muted">{s.body}</p>
+            <Reveal key={s.key} delay={(i % 3) * 80} className="bg-ink p-8 md:p-10">
+              <div className="flex items-center justify-between">
+                <SectorIcon sector={s.key} boxed />
+                <span className="num">0{i + 1}</span>
+              </div>
+              <h3 className="h-card mt-10">{s.title}</h3>
+              <p className="mt-4 text-[15px] leading-7 text-muted">{s.body}</p>
             </Reveal>
           ))}
+          <Reveal className="flex flex-col justify-between bg-ink-3 p-8 md:p-10">
+            <p className="h-card">Have an idea, capacity or capital in one of these fields?</p>
+            <div className="mt-8"><ArrowLink href="/contact">Let’s talk</ArrowLink></div>
+          </Reveal>
         </div>
       </Section>
 
@@ -92,7 +109,7 @@ export default function Home() {
           <SectionHead kicker="Projects & technologies" title={<>Selected work <em>in progress.</em></>} className="!mb-0" />
           <ArrowLink href="/projects">All projects</ArrowLink>
         </div>
-        <div className="mt-16 grid gap-px bg-[rgba(201,169,110,0.2)] md:grid-cols-3">
+        <div className="mt-16 grid gap-px bg-[rgba(140,170,230,0.16)] md:grid-cols-3">
           {featured.map((p, i) => (
             <Reveal key={p.slug} delay={i * 100} className="bg-ink">
               <Link href={`/projects/${p.slug}`} className="row-hover group flex h-full flex-col p-8 md:p-10">
@@ -103,7 +120,7 @@ export default function Home() {
                 <h3 className="h-card mt-16">{p.title}</h3>
                 <p className="mt-4 flex-1 text-[15px] leading-7 text-muted">{p.summary}</p>
                 <p className="mt-8 border-t rule-soft pt-5 text-xs uppercase tracking-[0.16em] text-dim">
-                  Seeking: <span className="text-[#cfc6b7]">{p.seeking.join(' · ')}</span>
+                  Seeking: <span className="text-[#c6d0e0]">{p.seeking.join(' · ')}</span>
                 </p>
               </Link>
             </Reveal>
@@ -129,17 +146,17 @@ export default function Home() {
       {/* IN THE FIELD */}
       <Section>
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <SectionHead kicker="In the field" title={<>Ideas presented, <em>tested, shared.</em></>} className="!mb-0" />
+          <SectionHead kicker="In the field" title={<>Conferences, factories, <em>global partners.</em></>} className="!mb-0" />
           <ArrowLink href="/about#moments">More moments</ArrowLink>
         </div>
-        <div className="mt-16 grid gap-6 md:grid-cols-[1.25fr_1fr]">
-          {[gallery[0], gallery[2]].map((g, i) => (
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
+          {[gallery[0], gallery[1], gallery[2]].map((g, i) => (
             <Reveal key={g.src} delay={i * 120}>
-              <figure className="group overflow-hidden">
+              <figure className="group">
                 <div className="overflow-hidden">
-                  <Image src={g.src} alt={g.alt} width={g.w} height={g.h} sizes="(min-width:768px) 50vw, 100vw" className="photo aspect-[4/3] w-full object-cover" />
+                  <Image src={g.src} alt={g.alt} width={g.w} height={g.h} sizes="(min-width:768px) 33vw, 100vw" className={`photo aspect-[4/5] w-full object-cover ${g.h > g.w ? 'object-[center_20%]' : 'object-center'}`} />
                 </div>
-                <figcaption className="mt-4 text-sm text-muted">{g.caption}</figcaption>
+                <figcaption className="mt-4 text-sm leading-6 text-muted">{g.caption}</figcaption>
               </figure>
             </Reveal>
           ))}

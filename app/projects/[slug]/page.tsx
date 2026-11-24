@@ -53,7 +53,7 @@ export default async function ProjectPage({ params }: PageProps<'/projects/[slug
                 <span className="num text-xl">0{i + 1}</span>
                 <div>
                   <h2 className="h-card">{t}</h2>
-                  <p className="mt-4 text-[17px] font-light leading-8 text-[#cfc7b9]">{b}</p>
+                  <p className="mt-4 text-[17px] font-light leading-8 text-[#c6d0e0]">{b}</p>
                 </div>
               </Reveal>
             ))}
@@ -88,7 +88,7 @@ export default async function ProjectPage({ params }: PageProps<'/projects/[slug
         <ol className="grid grid-cols-3 gap-3 md:grid-cols-6">
           {stages.map((s, i) => (
             <li key={s}>
-              <span className={`block h-px ${i <= stageIdx ? 'bg-gold' : 'bg-[rgba(239,232,220,0.12)]'}`} />
+              <span className={`block h-px ${i <= stageIdx ? 'bg-gold' : 'bg-[rgba(238,243,250,0.12)]'}`} />
               <span className={`mt-4 block text-xs uppercase tracking-[0.16em] ${i === stageIdx ? 'text-gold' : i < stageIdx ? 'text-ivory' : 'text-dim'}`}>{s}</span>
             </li>
           ))}

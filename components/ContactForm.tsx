@@ -112,7 +112,7 @@ export function ContactForm() {
       </div>
 
       <label className="flex cursor-pointer items-center gap-4 text-sm text-muted">
-        <input type="checkbox" name="nda" defaultChecked={topic === 'nda'} className="h-4 w-4 accent-[#c9a96e]" />
+        <input type="checkbox" name="nda" defaultChecked={topic === 'nda'} className="h-4 w-4 accent-[#ffb547]" />
         I’d like to discuss details under a mutual NDA
       </label>
 

@@ -1,9 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import '@fontsource-variable/inter'
-import '@fontsource/cormorant-garamond/300.css'
-import '@fontsource/cormorant-garamond/400.css'
-import '@fontsource/cormorant-garamond/300-italic.css'
-import '@fontsource/cormorant-garamond/400-italic.css'
+import '@fontsource-variable/sora'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -23,7 +20,7 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', creator: '@DrHaiderHardan1' },
 }
 
-export const viewport: Viewport = { themeColor: '#0a0908' }
+export const viewport: Viewport = { themeColor: '#050a14' }
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -42,7 +39,7 @@ const jsonLd = {
       name: 'Haider N. Hardan',
       honorificPrefix: 'Dr.',
       jobTitle: 'Founder, SEEH',
-      sameAs: [site.socials.linkedin, site.socials.x],
+      sameAs: Object.values(site.socials),
     },
   ],
 }

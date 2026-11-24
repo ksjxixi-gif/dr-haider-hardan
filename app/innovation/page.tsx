@@ -47,7 +47,7 @@ export default function Innovation() {
 
       <Section>
         <SectionHead kicker="Research directions" title={<>Where our R&amp;D <em>is focused.</em></>} />
-        <div className="grid gap-px bg-[rgba(201,169,110,0.2)] md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-px bg-[rgba(140,170,230,0.16)] md:grid-cols-2 lg:grid-cols-3">
           {sectors.map((s, i) => (
             <Reveal key={s.key} delay={(i % 3) * 80} className="bg-ink p-8 md:p-10">
               <span className="num text-xl">0{i + 1}</span>

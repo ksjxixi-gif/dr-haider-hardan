@@ -13,6 +13,8 @@ export const site = {
   socials: {
     linkedin: 'https://www.linkedin.com/in/dr-haider-n-hardan-352517180/',
     x: 'https://x.com/DrHaiderHardan1',
+    instagram: 'https://www.instagram.com/drhaiderhardan',
+    facebook: 'https://www.facebook.com/share/1Hw5rGUQ24/',
   },
 }
 
@@ -78,6 +80,20 @@ export const audiences = [
 
 export const gallery = [
   {
+    src: '/images/aqaba-conference-podium.webp',
+    w: 960,
+    h: 581,
+    alt: 'Dr. Haider Hardan speaking at the 1st Aqaba Dental Conference, Jordan, 2016',
+    caption: 'Speaking at the 1st Aqaba Dental Conference & 2nd Mediterranean and Middle East Dental Conference, Aqaba, 2016.',
+  },
+  {
+    src: '/images/trade-fair-medical-devices.webp',
+    w: 1125,
+    h: 2000,
+    alt: 'Dr. Haider Hardan at a medical-device manufacturer’s stand at an international trade fair',
+    caption: 'Meeting medical-device manufacturers at an international trade exhibition.',
+  },
+  {
     src: '/images/poster-endodontic-1.webp',
     w: 960,
     h: 720,
@@ -104,5 +120,19 @@ export const gallery = [
     h: 720,
     alt: 'Dr. Haider Hardan with a colleague after a lecture',
     caption: 'After a lecture and knowledge-exchange session.',
+  },
+  {
+    src: '/images/trade-fair-manufacturers.webp',
+    w: 1125,
+    h: 2000,
+    alt: 'Dr. Haider Hardan with an industrial manufacturer at an international trade fair',
+    caption: 'Building relationships with industrial manufacturers abroad.',
+  },
+  {
+    src: '/images/conference-speaker.webp',
+    w: 960,
+    h: 720,
+    alt: 'Dr. Haider Hardan with an international speaker at a scientific conference',
+    caption: 'With an international keynote speaker at a scientific conference.',
   },
 ] as const

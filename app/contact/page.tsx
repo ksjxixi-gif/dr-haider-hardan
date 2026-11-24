@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import { site } from '@/content/site'
 import { PageHero } from '@/components/ui'
 import { ContactForm } from '@/components/ContactForm'
-import { LinkedInIcon, XIcon } from '@/components/icons'
+import { socialLinks } from '@/components/icons'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -36,8 +36,11 @@ export default function Contact() {
             <div>
               <p className="label mb-4">Follow</p>
               <div className="flex flex-col gap-3">
-                <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted hover:text-gold"><LinkedInIcon /> Dr. Haider N. Hardan</a>
-                <a href={site.socials.x} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted hover:text-gold"><XIcon /> @DrHaiderHardan1</a>
+                {socialLinks.map(({ href, label, handle, Icon }) => (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted hover:text-gold">
+                    <Icon /> {handle} <span className="text-dim">· {label}</span>
+                  </a>
+                ))}
               </div>
             </div>
             <p className="border-t rule pt-8 text-sm leading-7 text-dim">
