@@ -1,9 +1,14 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import type { ReactNode } from 'react'
 import type { Img } from '@/content/images'
+import type { Stage } from '@/content/projects'
+import { siteAr, stageLabelsAr } from '@/content/i18n'
 import { Reveal } from './Reveal'
+import { useLang } from './LanguageProvider'
 
 /** SEEH mark redrawn from the brand banner: outlined leaf over a blue water-drop crescent.
  *  TODO(client): replace with the official vector logo file when available. */
@@ -26,12 +31,15 @@ export function LogoMark({ light = false, size = 34 }: { light?: boolean; size?:
 }
 
 export function Logo({ light = false }: { light?: boolean }) {
+  const { isAr } = useLang()
   return (
     <span className="flex items-center gap-3">
       <LogoMark light={light} size={30} />
       <span className="leading-none">
         <span className={`block font-[family-name:Michroma] text-[21px] tracking-[0.04em] ${light ? 'text-white' : 'text-ink'}`}>SEEH</span>
-        <span className={`mt-1.5 block text-[10px] tracking-[0.04em] ${light ? 'text-white/70' : 'text-body'}`}>Sustainability, Entrepreneurship, Energy &amp; Health</span>
+        <span className={`mt-1.5 block text-[10px] tracking-[0.04em] ${light ? 'text-white/70' : 'text-body'}`}>
+          {isAr ? siteAr.tagline : 'Sustainability, Entrepreneurship, Energy & Health'}
+        </span>
       </span>
     </span>
   )
@@ -42,7 +50,7 @@ export function Button({ href, children, kind = 'primary', arrow = true }: { hre
   return (
     <Link href={href} className={`btn btn-${kind}`}>
       {children}
-      {arrow && <ArrowRight size={18} strokeWidth={2.2} aria-hidden />}
+      {arrow && <ArrowRight size={18} strokeWidth={2.2} className="rtl-flip" aria-hidden />}
     </Link>
   )
 }
@@ -50,20 +58,15 @@ export function Button({ href, children, kind = 'primary', arrow = true }: { hre
 export function TextLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <Link href={href} className="link">
-      {children} <ArrowRight size={16} strokeWidth={2.4} aria-hidden />
+      {children} <ArrowRight size={16} strokeWidth={2.4} className="rtl-flip" aria-hidden />
     </Link>
   )
 }
 
 type Tone = 'white' | 'soft' | 'navy'
-const toneCls: Record<Tone, string> = {
-  white: 'bg-white',
-  soft: 'bg-soft',
-  navy: 'on-dark bg-navy-900 text-white',
-}
-export function Section({ children, tone = 'white', className = '', id }: { children: ReactNode; tone?: Tone; className?: string; id?: string }) {
+export function Section({ children, className = '', id }: { children: ReactNode; tone?: Tone; className?: string; id?: string }) {
   return (
-    <section id={id} className={`relative py-20 md:py-28 ${toneCls[tone]} ${className}`}>
+    <section id={id} className={`relative border-t border-line bg-white py-20 md:py-28 ${className}`}>
       <div className="wrap relative">{children}</div>
     </section>
   )
@@ -97,7 +100,7 @@ export function SectionHeader({
 export function PageHero({ eyebrow, title, intro, image, children }: { eyebrow: string; title: ReactNode; intro?: ReactNode; image: Img; children?: ReactNode }) {
   return (
     <section className="bg-white">
-      <div className="wrap pt-14 md:pt-20">
+      <div className="wrap pt-14 pb-14 md:pt-20 md:pb-20">
         <Reveal className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <p className="eyebrow">{eyebrow}</p>
@@ -125,10 +128,12 @@ const stageStyle: Record<string, string> = {
   Ready: 'bg-emerald-50 text-emerald-700',
 }
 export function StageBadge({ stage }: { stage: string }) {
+  const { isAr } = useLang()
+  const label = isAr ? (stageLabelsAr[stage as Stage] ?? stage) : stage
   return (
     <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${stageStyle[stage] ?? 'bg-slate-100 text-slate-700'}`}>
       <span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden />
-      {stage}
+      {label}
     </span>
   )
 }
@@ -136,7 +141,7 @@ export function StageBadge({ stage }: { stage: string }) {
 export function CtaBand({
   title,
   intro,
-  primary = { href: '/contact', label: 'Start a conversation' },
+  primary,
   secondary,
   image,
 }: {
@@ -146,8 +151,10 @@ export function CtaBand({
   secondary?: { href: string; label: string }
   image: Img
 }) {
+  const { isAr } = useLang()
+  const primaryBtn = primary ?? { href: '/contact', label: isAr ? 'ابدأ محادثة' : 'Start a conversation' }
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="border-t border-line bg-white py-16 md:py-24">
       <div className="wrap">
         <Reveal className="on-dark relative overflow-hidden rounded-xl bg-navy-900 text-white">
           <Image src={image.src} alt="" fill sizes="(min-width:1280px) 1200px, 100vw" className="object-cover" />
@@ -158,7 +165,7 @@ export function CtaBand({
               <p className="lead mt-5 max-w-xl">{intro}</p>
             </div>
             <div className="flex flex-col gap-4 sm:flex-row lg:justify-end">
-              <Button href={primary.href}>{primary.label}</Button>
+              <Button href={primaryBtn.href}>{primaryBtn.label}</Button>
               {secondary && (
                 <Button href={secondary.href} kind="glass" arrow={false}>
                   {secondary.label}

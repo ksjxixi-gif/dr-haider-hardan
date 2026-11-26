@@ -231,6 +231,26 @@ body {
   }
 }
 
+html[dir='rtl'] body {
+  font-family: 'IBM Plex Sans Arabic', var(--font-sans);
+}
+html[dir='rtl'] .h1,
+html[dir='rtl'] .h2,
+html[dir='rtl'] .h3,
+html[dir='rtl'] .prose-article h2 {
+  font-family: 'IBM Plex Sans Arabic', var(--font-display);
+  letter-spacing: 0;
+}
+html[dir='rtl'] .eyebrow {
+  letter-spacing: 0;
+}
+html[dir='rtl'] .link:hover svg {
+  transform: translateX(-3px);
+}
+html[dir='rtl'] .rtl-flip {
+  transform: scaleX(-1);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(16px);

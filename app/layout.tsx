@@ -2,14 +2,19 @@ import type { Metadata, Viewport } from 'next'
 import '@fontsource-variable/inter'
 import '@fontsource-variable/sora'
 import '@fontsource/michroma'
+import '@fontsource/ibm-plex-sans-arabic/400.css'
+import '@fontsource/ibm-plex-sans-arabic/500.css'
+import '@fontsource/ibm-plex-sans-arabic/600.css'
+import '@fontsource/ibm-plex-sans-arabic/700.css'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { LanguageProvider } from '@/components/LanguageProvider'
 import { site } from '@/content/site'
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: 'Dr. Haider N. Hardan · SEEH, Sustainability, Entrepreneurship, Energy & Health', template: '%s · SEEH' },
+  title: { default: 'SEEH', template: '%s · SEEH' },
   description: site.description,
   openGraph: {
     type: 'website',
@@ -49,12 +54,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-brand focus:px-4 focus:py-2 focus:text-white">
-          Skip to content
-        </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-brand focus:px-4 focus:py-2 focus:text-white">
+            Skip to content
+          </a>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </LanguageProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>
