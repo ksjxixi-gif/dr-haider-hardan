@@ -78,61 +78,107 @@ export const audiences = [
   { title: 'Research & universities', body: 'Joint research, validation and applied development.' },
 ] as const
 
-export const gallery = [
-  {
+const photos = {
+  solar: {
+    src: '/images/philadelphia-solar.webp',
+    w: 1600,
+    h: 1200,
+    alt: 'Dr. Haider Hardan at Philadelphia Solar in Jordan, next to a solar panel',
+    caption: 'At Philadelphia Solar in Jordan, exploring solar technology and manufacturing partnerships.',
+  },
+  ai: {
+    src: '/images/jordan-builds-ai.webp',
+    w: 1600,
+    h: 1200,
+    alt: 'Dr. Haider Hardan at the Jordan Builds with Replit AI event',
+    caption: 'At Jordan Builds with Replit, an AI and software building event in Jordan.',
+  },
+  aqaba: {
     src: '/images/aqaba-conference-podium.webp',
     w: 960,
     h: 581,
     alt: 'Dr. Haider Hardan speaking at the 1st Aqaba Dental Conference, Jordan, 2016',
     caption: 'Speaking at the 1st Aqaba Dental Conference & 2nd Mediterranean and Middle East Dental Conference, Aqaba, 2016.',
   },
-  {
+  medicalFair: {
     src: '/images/trade-fair-medical-devices.webp',
     w: 1125,
     h: 2000,
     alt: 'Dr. Haider Hardan at a medical-device manufacturer’s stand at an international trade fair',
     caption: 'Meeting medical-device manufacturers at an international trade exhibition.',
   },
-  {
+  imta: {
+    src: '/images/imta-cpd.webp',
+    w: 528,
+    h: 960,
+    alt: 'Dr. Haider Hardan at an International Medical Training Academy CPD event',
+    caption: 'At an International Medical Training Academy (IMTA) continuing professional development event.',
+  },
+  poster1: {
     src: '/images/poster-endodontic-1.webp',
     w: 960,
     h: 720,
     alt: 'Dr. Haider Hardan beside his invention poster at a scientific conference',
     caption: 'Presenting the Rubber Balloon Endodontic Obturation invention at a scientific conference.',
   },
-  {
+  poster2: {
     src: '/images/poster-endodontic-2.webp',
     w: 720,
     h: 960,
     alt: 'Dr. Haider Hardan with a colleague at his invention poster',
     caption: 'Discussing the invention and its injection device with fellow specialists.',
   },
-  {
-    src: '/images/event-dinner.webp',
-    w: 1280,
-    h: 720,
-    alt: 'Dr. Haider Hardan with a colleague at a professional event',
-    caption: 'With colleagues at a professional gathering.',
-  },
-  {
-    src: '/images/event-lecture.webp',
-    w: 960,
-    h: 720,
-    alt: 'Dr. Haider Hardan with a colleague after a lecture',
-    caption: 'After a lecture and knowledge-exchange session.',
-  },
-  {
+  factoryFair: {
     src: '/images/trade-fair-manufacturers.webp',
     w: 1125,
     h: 2000,
     alt: 'Dr. Haider Hardan with an industrial manufacturer at an international trade fair',
     caption: 'Building relationships with industrial manufacturers abroad.',
   },
-  {
+  speaker: {
     src: '/images/conference-speaker.webp',
     w: 960,
     h: 720,
     alt: 'Dr. Haider Hardan with an international speaker at a scientific conference',
     caption: 'With an international keynote speaker at a scientific conference.',
   },
-] as const
+  office: {
+    src: '/images/office-meeting.webp',
+    w: 1600,
+    h: 1200,
+    alt: 'Dr. Haider Hardan with a colleague in an office',
+    caption: 'Working sessions with industry colleagues.',
+  },
+  dinner: {
+    src: '/images/event-dinner.webp',
+    w: 1280,
+    h: 720,
+    alt: 'Dr. Haider Hardan with a colleague at a professional event',
+    caption: 'With colleagues at a professional gathering.',
+  },
+  lecture: {
+    src: '/images/event-lecture.webp',
+    w: 960,
+    h: 720,
+    alt: 'Dr. Haider Hardan with a colleague after a lecture',
+    caption: 'After a lecture and knowledge-exchange session.',
+  },
+} as const
+
+export const photo = photos
+
+/** About-page gallery order (strongest first). */
+export const gallery = [
+  photos.solar,
+  photos.ai,
+  photos.aqaba,
+  photos.medicalFair,
+  photos.poster1,
+  photos.imta,
+  photos.factoryFair,
+  photos.poster2,
+  photos.speaker,
+  photos.office,
+  photos.dinner,
+  photos.lecture,
+]

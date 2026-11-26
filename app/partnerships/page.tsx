@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Building2, Check, Coins, Cpu, Factory, GraduationCap, Microscope } from 'lucide-react'
-import { gallery } from '@/content/site'
+import { photo as sitePhoto } from '@/content/site'
 import { img } from '@/content/images'
 import { CtaBand, PageHero, Section, SectionHeader } from '@/components/ui'
 import { Reveal } from '@/components/Reveal'
@@ -23,7 +23,7 @@ const partners = [
 const models = ['Joint development agreements', 'Technology licensing', 'Manufacturing & supply partnerships', 'Research collaboration & pilots', 'Regional distribution rights']
 
 export default function Partnerships() {
-  const photo = gallery[1]
+  const photo = sitePhoto.factoryFair
   return (
     <>
       <PageHero

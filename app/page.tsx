@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Coins, Factory, FlaskConical, Handshake, Quote, ShieldCheck } from 'lucide-react'
-import { audiences, gallery, process, sectors, site } from '@/content/site'
+import { audiences, photo, process, sectors, site } from '@/content/site'
 import { projects } from '@/content/projects'
 import { img, projectImg, sectorImg } from '@/content/images'
 import { Button, CtaBand, Section, SectionHeader, StageBadge, TextLink } from '@/components/ui'
@@ -98,14 +98,14 @@ export default function Home() {
 
           <Reveal delay={120} className="grid grid-cols-5 gap-3">
             <figure className="relative col-span-3 aspect-[4/5] overflow-hidden rounded-lg">
-              <Image src={gallery[0].src} alt={gallery[0].alt} fill sizes="(min-width:1024px) 360px, 60vw" className="object-cover" />
+              <Image src={photo.solar.src} alt={photo.solar.alt} fill sizes="(min-width:1024px) 360px, 60vw" className="object-cover" />
             </figure>
             <div className="col-span-2 flex flex-col gap-3">
               <figure className="relative flex-1 overflow-hidden rounded-lg">
-                <Image src={gallery[1].src} alt={gallery[1].alt} fill sizes="(min-width:1024px) 240px, 40vw" className="object-cover object-[center_20%]" />
+                <Image src={photo.ai.src} alt={photo.ai.alt} fill sizes="(min-width:1024px) 240px, 40vw" className="object-cover object-[70%_center]" />
               </figure>
               <p className="rounded-lg bg-soft p-4 text-sm leading-6 text-body">
-                Speaking in Aqaba and meeting manufacturers abroad: SEEH is built on real relationships.
+                From solar manufacturers to AI events in Jordan: SEEH is built on real, on-the-ground relationships.
               </p>
             </div>
           </Reveal>
@@ -256,7 +256,7 @@ export default function Home() {
           action={<Button href="/about#moments" kind="outline">See all moments</Button>}
         />
         <div className="grid gap-5 md:grid-cols-3">
-          {[gallery[0], gallery[1], gallery[2]].map((g, i) => (
+          {[photo.aqaba, photo.medicalFair, photo.imta].map((g, i) => (
             <Reveal key={g.src} delay={i * 100}>
               <figure className="card group h-full overflow-hidden">
                 <div className="relative aspect-[4/3] overflow-hidden">
