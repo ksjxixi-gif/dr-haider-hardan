@@ -80,14 +80,14 @@ export const audiences = [
 
 const photos = {
   solar: {
-    src: '/images/philadelphia-solar.webp',
+    src: '/images/jordan-builds-ai.webp',
     w: 1600,
     h: 1200,
     alt: 'Dr. Haider Hardan at Philadelphia Solar in Jordan, next to a solar panel',
     caption: 'At Philadelphia Solar in Jordan, exploring solar technology and manufacturing partnerships.',
   },
   ai: {
-    src: '/images/jordan-builds-ai.webp',
+    src: '/images/trade-fair-manufacturers.webp',
     w: 1600,
     h: 1200,
     alt: 'Dr. Haider Hardan at the Jordan Builds with Replit AI event',
